@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic AI Roadmap — From Chatbots to Autonomous Workers</title>
+  <meta name="description" content="A human-friendly research guide to building and deploying agentic AI systems — from simple chatbots to autonomous AI workers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050608; --bg-2: #0c0e12; --bg-3: #13161c; --bg-4: #1a1d26;
+      --text: #f0f2f5; --text-2: #8b92a8; --text-3: #5a6070;
+      --accent: #6366f1; --accent-2: #818cf8; --accent-glow: rgba(99,102,241,.3);
+      --pink: #ec4899; --cyan: #06b6d4; --green: #22c55e; --orange: #f59e0b;
+      --border: #1e2230; --border-hover: #2e3348;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Inter',sans-serif; background:var(--bg); color:var(--text);
+      -webkit-font-smoothing:antialiased; overflow-x:hidden; line-height:1.6;
+    }
+    ::selection { background:var(--accent); color:#fff; }
+
+    /* ── Cursor ── */
+    .cursor { position:fixed; top:0; left:0; pointer-events:none; z-index:99999; mix-blend-mode:difference; }
+    .cursor-dot { width:8px; height:8px; background:#fff; border-radius:50%; transform:translate(-50%,-50%); }
+    .cursor-ring { width:40px; height:40px; border:1.5px solid var(--accent-2); border-radius:50%; transform:translate(-50%,-50%); transition:all .12s ease-out; }
+    .cursor.hover .cursor-ring { width:64px; height:64px; border-color:var(--pink); background:rgba(236,72,153,0.08); }
+    @media (pointer:coarse) { .cursor { display:none; } body { cursor:auto; } }
+
+    /* ── Noise ── */
+    .noise { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.03;
+      background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* ── Ambient blobs ── */
+    .blob { position:fixed; border-radius:50%; filter:blur(100px); pointer-events:none; z-index:0; opacity:.12; animation:blobFloat 14s ease-in-out infinite; }
+    @keyframes blobFloat { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-50px) scale(1.15)} 66%{transform:translate(-30px,40px) scale(.9)} }
+
+    /* ── Scroll entrance ── */
+    .fade-up { opacity:0; transform:translateY(30px); transition:all .8s cubic-bezier(.16,1,.3,1); }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+    .section-title { opacity:0; transform:translateX(-20px); transition:all .7s cubic-bezier(.16,1,.3,1); }
+    .section-title.visible { opacity:1; transform:translateX(0); }
+
+    /* ── Nav ── */
+    nav { position:fixed; inset:0 0 auto 0; z-index:100; background:rgba(5,6,8,.7); backdrop-filter:blur(20px) saturate(1.2); border-bottom:1px solid rgba(30,34,48,.5); transition:all .3s; }
+    nav.scrolled { background:rgba(5,6,8,.92); border-bottom-color:var(--border); }
+    .container { max-width:1100px; margin:0 auto; padding:0 24px; position:relative; z-index:2; }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text); text-decoration:none; letter-spacing:-.02em; }
+    .logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:28px; list-style:none; }
+    .nav-links a { color:var(--text-2); text-decoration:none; font-size:.88rem; font-weight:500; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-cta { display:none; }
+    @media (max-width:768px) {
+      .nav-links { display:none; }
+      .nav-cta { display:block; font-size:.85rem; color:var(--accent); font-weight:600; text-decoration:none; }
+    }
+
+    /* ── Hero ── */
+    .hero { padding:160px 0 100px; text-align:center; position:relative; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--bg-3); border:1px solid var(--border); font-size:.78rem; color:var(--text-2); margin-bottom:28px; }
+    .hero-badge .pulse { width:8px; height:8px; border-radius:50%; background:var(--green); animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+    .hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2rem,5vw,3.6rem); font-weight:700; line-height:1.1; letter-spacing:-.03em; max-width:800px; margin:0 auto 24px; }
+    .gradient-text { background:linear-gradient(135deg,#fff 25%,var(--accent-2) 60%,var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero p { font-size:clamp(1rem,2vw,1.25rem); color:var(--text-2); max-width:560px; margin:0 auto 40px; line-height:1.6; }
+    .hero-buttons { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:13px 28px; border-radius:12px; font-weight:600; font-size:.92rem; transition:all .3s cubic-bezier(.16,1,.3,1); border:1px solid transparent; position:relative; overflow:hidden; cursor:pointer; text-decoration:none; }
+    .btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.12) 50%,transparent 60%); transform:translateX(-100%); transition:transform .5s; }
+    .btn:hover::before { transform:translateX(100%); }
+    .btn-primary { background:linear-gradient(135deg,var(--accent),var(--pink)); color:#fff; box-shadow:0 4px 24px rgba(99,102,241,.3); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(99,102,241,.45); }
+    .btn-outline { background:transparent; border-color:var(--border); color:var(--text); backdrop-filter:blur(8px); }
+    .btn-outline:hover { border-color:var(--accent); background:rgba(99,102,241,.08); transform:translateY(-2px); }
+
+    /* ── Scroll hint ── */
+    .scroll-hint { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeInDown 1s 1.5s forwards; }
+    .scroll-hint span { font-size:.7rem; color:var(--text-2); text-transform:uppercase; letter-spacing:.15em; }
+    .scroll-hint .mouse { width:20px; height:32px; border:2px solid var(--text-2); border-radius:10px; position:relative; }
+    .scroll-hint .mouse::after { content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:3px; height:6px; background:var(--accent-2); border-radius:2px; animation:scrollWheel 1.5s ease-in-out infinite; }
+    @keyframes scrollWheel { 0%,100%{top:6px;opacity:1} 50%{top:14px;opacity:0} }
+    @keyframes fadeInDown { to{opacity:1} }
+
+    /* ── Sections ── */
+    .section { padding:90px 0; position:relative; }
+    .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700; margin-bottom:48px; display:flex; align-items:center; gap:14px; }
+    .section-title .line { flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+    .section-title .line-left { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--border)); }
+
+    /* ── Stage Cards ── */
+    .stages-grid { display:grid; gap:16px; }
+    .stage-card { background:rgba(12,14,18,.6); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all .4s cubic-bezier(.16,1,.3,1); position:relative; }
+    .stage-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+    .stage-card.active { border-color:var(--accent); }
+    .stage-header { display:flex; align-items:center; gap:16px; padding:20px 24px; cursor:pointer; }
+    .stage-num { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; flex-shrink:0; }
+    .stage-num.n1 { background:rgba(99,102,241,.12); color:var(--accent); }
+    .stage-num.n2 { background:rgba(236,72,153,.12); color:var(--pink); }
+    .stage-num.n3 { background:rgba(6,182,212,.12); color:var(--cyan); }
+    .stage-num.n4 { background:rgba(34,197,94,.12); color:var(--green); }
+    .stage-num.n5 { background:rgba(245,158,11,.12); color:var(--orange); }
+    .stage-num.n6 { background:rgba(168,85,247,.12); color:#a855f7; }
+    .stage-title-wrap { flex:1; }
+    .stage-title-wrap h3 { font-size:1.05rem; font-weight:600; margin-bottom:2px; }
+    .stage-title-wrap span { font-size:.82rem; color:var(--text-3); }
+    .stage-toggle { width:32px; height:32px; border-radius:8px; background:var(--bg-3); display:flex; align-items:center; justify-content:center; color:var(--text-2); transition:all .3s; flex-shrink:0; }
+    .stage-card.active .stage-toggle { transform:rotate(180deg); background:var(--accent); color:#fff; }
+    .stage-body { max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.16,1,.3,1); }
+    .stage-card.active .stage-body { max-height:800px; }
+    .stage-inner { padding:0 24px 24px; }
+    .stage-visual { display:flex; align-items:center; gap:12px; padding:16px; background:var(--bg-2); border-radius:12px; margin-bottom:20px; font-size:.88rem; color:var(--text-2); flex-wrap:wrap; }
+    .stage-visual .arrow { color:var(--text-3); font-size:1.2rem; }
+    .stage-visual .entity { padding:6px 12px; border-radius:8px; background:var(--bg-3); border:1px solid var(--border); font-size:.8rem; font-weight:500; color:var(--text); }
+    .stage-visual .entity.ai { border-color:var(--accent); color:var(--accent-2); }
+    .stage-visual .entity.tool { border-color:var(--green); color:var(--green); }
+    .stage-visual .entity.human { border-color:var(--pink); color:var(--pink); }
+
+    .stage-desc { font-size:.92rem; color:var(--text-2); line-height:1.7; margin-bottom:20px; }
+    .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media (max-width:640px) { .detail-grid { grid-template-columns:1fr; } }
+    .detail-box { background:var(--bg-2); border:1px solid var(--border); border-radius:12px; padding:16px; }
+    .detail-box h4 { font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-3); margin-bottom:10px; font-weight:600; }
+    .detail-box ul { list-style:none; font-size:.85rem; color:var(--text-2); }
+    .detail-box li { padding:4px 0; display:flex; align-items:flex-start; gap:8px; }
+    .detail-box li::before { content:'•'; color:var(--accent); font-weight:700; }
+    .detail-box code { background:var(--bg-3); padding:2px 6px; border-radius:4px; font-size:.8rem; color:var(--accent-2); font-family:'SF Mono',monospace; }
+
+    /* ── Patterns ── */
+    .patterns { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%,300px),1fr)); gap:16px; }
+    .pattern-card { background:rgba(12,14,18,.6); border:1px solid var(--border); border-radius:16px; padding:24px; transition:all .3s; }
+    .pattern-card:hover { border-color:var(--accent); transform:translateY(-3px); }
+    .pattern-card .icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:16px; background:var(--bg-3); }
+    .pattern-card h3 { font-size:1.05rem; font-weight:600; margin-bottom:8px; }
+    .pattern-card p { font-size:.88rem; color:var(--text-2); line-height:1.6; }
+
+    /* ── Frameworks ── */
+    .frameworks-table { width:100%; border-collapse:collapse; font-size:.88rem; }
+    .frameworks-table th { text-align:left; padding:14px 16px; background:var(--bg-2); border-bottom:1px solid var(--border); font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-3); font-weight:600; }
+    .frameworks-table td { padding:14px 16px; border-bottom:1px solid var(--border); color:var(--text-2); vertical-align:top; }
+    .frameworks-table tr:hover td { background:rgba(255,255,255,.02); }
+    .fw-name { font-weight:600; color:var(--text); display:flex; align-items:center; gap:8px; }
+    .fw-tag { font-size:.72rem; padding:3px 8px; border-radius:6px; background:var(--bg-3); border:1px solid var(--border); color:var(--text-2); white-space:nowrap; }
+    .fw-tag.best { border-color:var(--green); color:var(--green); }
+    @media (max-width:768px) {
+      .frameworks-table thead { display:none; }
+      .frameworks-table tr { display:block; margin-bottom:16px; background:rgba(12,14,18,.6); border:1px solid var(--border); border-radius:12px; padding:16px; }
+      .frameworks-table td { display:block; padding:6px 0; border:none; }
+      .frameworks-table td::before { content:attr(data-label) ": "; font-weight:600; color:var(--text-3); font-size:.78rem; text-transform:uppercase; }
+    }
+
+    /* ── MCP section ── */
+    .mcp-card { background:linear-gradient(135deg, rgba(99,102,241,.08), rgba(236,72,153,.05)); border:1px solid var(--border); border-radius:16px; padding:32px; position:relative; overflow:hidden; }
+    .mcp-card::before { content:''; position:absolute; top:-50%; right:-20%; width:300px; height:300px; border-radius:50%; background:var(--accent); filter:blur(120px); opacity:.06; pointer-events:none; }
+    .mcp-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; margin-bottom:12px; }
+    .mcp-card p { color:var(--text-2); font-size:.92rem; line-height:1.7; max-width:640px; }
+
+    /* ── Footer ── */
+    footer { padding:60px 0 40px; text-align:center; border-top:1px solid var(--border); margin-top:60px; }
+    footer p { color:var(--text-3); font-size:.85rem; }
+    footer a { color:var(--text-2); text-decoration:none; }
+    footer a:hover { color:var(--accent-2); }
+
+    /* ── Responsive ── */
+    @media (max-width:768px) {
+      .hero { padding:120px 0 60px; }
+      .section { padding:50px 0; }
+      .stage-header { padding:16px 20px; }
+      .stage-inner { padding:0 20px 20px; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+
+    /* ── Utility ── */
+    .text-center { text-align:center; }
+    .mb-8 { margin-bottom:8px; }
+    .mb-16 { margin-bottom:16px; }
+    .mb-24 { margin-bottom:24px; }
+    .mb-32 { margin-bottom:32px; }
+    .mt-16 { margin-top:16px; }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"><div class="cursor-ring"></div><div class="cursor-dot"></div></div>
+<canvas id="bgCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
+<div class="noise"></div>
+<div class="blob" style="width:500px;height:500px;background:var(--accent);top:-10%;right:-15%"></div>
+<div class="blob" style="width:400px;height:400px;background:var(--pink);top:30%;left:-15%;animation-delay:-5s"></div>
+<div class="blob" style="width:350px;height:350px;background:var(--cyan);bottom:10%;right:-10%;animation-delay:-10s;opacity:.08"></div>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">Agentic<span>AI</span></a>
+      <ul class="nav-links">
+        <li><a href="#stages">Stages</a></li>
+        <li><a href="#patterns">Patterns</a></li>
+        <li><a href="#frameworks">Frameworks</a></li>
+        <li><a href="#mcp">MCP</a></li>
+      </ul>
+      <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="nav-cta" target="_blank">GitHub →</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge fade-up"><div class="pulse"></div> Living Research — Updated May 2026</div>
+    <h1 class="fade-up">From Chatbots to <span class="gradient-text">Autonomous AI Workers</span></h1>
+    <p class="fade-up">A human-friendly roadmap for understanding, building, and deploying agentic AI systems — whether you're a beginner exploring the idea or an engineer wiring up multi-agent swarms.</p>
+    <div class="hero-buttons fade-up">
+      <a href="#stages" class="btn btn-primary">Explore the Stages</a>
+      <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="btn btn-outline" target="_blank">View on GitHub</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="mouse"></div></div>
+</section>
+
+<!-- ═══ STAGES ═══ -->
+<section class="section" id="stages">
+  <div class="container">
+    <div class="section-title fade-up"><span class="line-left"></span>The 6 Stages<span class="line"></span></div>
+    <p class="fade-up mb-32" style="color:var(--text-2);max-width:640px;">Each stage adds a new capability. You don't need to jump to the end — most value today comes from Stage 3 and 4.</p>
+
+    <div class="stages-grid">
+
+      <!-- Stage 1 -->
+      <div class="stage-card fade-up" data-stage="1">
+        <div class="stage-header" onclick="toggleStage(1)">
+          <div class="stage-num n1">01</div>
+          <div class="stage-title-wrap">
+            <h3>Chatbot</h3>
+            <span>Passive Q&A — you ask, it answers</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-inner">
+            <div class="stage-visual">
+              <span class="entity human">👤 You</span>
+              <span class="arrow">→</span>
+              <span class="entity">"What's the weather?"</span>
+              <span class="arrow">→</span>
+              <span class="entity ai">🤖 AI</span>
+              <span class="arrow">→</span>
+              <span class="entity">"It's sunny, 72°F."</span>
+            </div>
+            <p class="stage-desc">The simplest form. A single prompt in, a single response out. No memory, no tools, no action. Think ChatGPT in its most basic mode, or a customer support FAQ bot.</p>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h4>For Beginners</h4>
+                <ul>
+                  <li>Start with ChatGPT, Claude, or Gemini</li>
+                  <li>Learn prompt engineering basics</li>
+                  <li>Experiment with role prompts</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Engineer Details</h4>
+                <ul>
+                  <li>Single-turn inference via REST API</li>
+                  <li>Context window management</li>
+                  <li>System prompts & temperature tuning</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="stage-card fade-up" data-stage="2">
+        <div class="stage-header" onclick="toggleStage(2)">
+          <div class="stage-num n2">02</div>
+          <div class="stage-title-wrap">
+            <h3>Copilot</h3>
+            <span>AI assists — you stay in the driver's seat</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-inner">
+            <div class="stage-visual">
+              <span class="entity human">👤 You</span>
+              <span class="arrow">↔</span>
+              <span class="entity ai">🤖 Copilot</span>
+              <span class="entity tool">🛠️ IDE / Doc</span>
+            </div>
+            <p class="stage-desc">The AI works alongside you in real-time. GitHub Copilot suggests code as you type. Notion AI rewrites your paragraphs. You approve every change — the AI never acts alone.</p>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h4>For Beginners</h4>
+                <ul>
+                  <li>Try GitHub Copilot or Cursor IDE</li>
+                  <li>Use Notion AI or Google Docs AI</li>
+                  <li>Think "assistant," not "replacement"</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Engineer Details</h4>
+                <ul>
+                  <li>Inline completion APIs (streaming SSE)</li>
+                  <li>Context injection from current file/project</li>
+                  <li>Latency-critical: <code>&lt;300ms</code> to feel instant</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="stage-card fade-up" data-stage="3">
+        <div class="stage-header" onclick="toggleStage(3)">
+          <div class="stage-num n3">03</div>
+          <div class="stage-title-wrap">
+            <h3>Agent</h3>
+            <span>AI picks a tool and completes the task</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-inner">
+            <div class="stage-visual">
+              <span class="entity human">👤 Goal</span>
+              <span class="arrow">→</span>
+              <span class="entity ai">🤖 Agent</span>
+              <span class="arrow">⚡</span>
+              <span class="entity tool">🔧 Tool</span>
+              <span class="arrow">→</span>
+              <span class="entity tool">📊 Result</span>
+            </div>
+            <p class="stage-desc">You give a goal, the AI reasons, picks the right tool, executes, and returns a result. It can browse the web, query a database, or run code — all without you micromanaging each step. This is where "agentic" actually begins.</p>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h4>For Beginners</h4>
+                <ul>
+                  <li>Try ChatGPT with Code Interpreter</li>
+                  <li>Use Perplexity for research with sources</li>
+                  <li>Build a simple zapier + OpenAI flow</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Engineer Details</h4>
+                <ul>
+                  <li>ReAct pattern: Reason → Act → Observe</li>
+                  <li>Tool schemas (OpenAI function calling)</li>
+                  <li>Loop until task complete or max iterations</li>
+                  <li>Key frameworks: <code>LangChain</code>, <code>OpenAI Agents SDK</code></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="stage-card fade-up" data-stage="4">
+        <div class="stage-header" onclick="toggleStage(4)">
+          <div class="stage-num n4">04</div>
+          <div class="stage-title-wrap">
+            <h3>Multi-Agent Team</h3>
+            <span>Specialized agents hand off work to each other</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-inner">
+            <div class="stage-visual">
+              <span class="entity ai">🔍 Researcher</span>
+              <span class="arrow">→</span>
+              <span class="entity ai">✍️ Writer</span>
+              <span class="arrow">→</span>
+              <span class="entity ai">🔎 Editor</span>
+              <span class="arrow">→</span>
+              <span class="entity">📄 Final Doc</span>
+            </div>
+            <p class="stage-desc">Instead of one generalist agent, you have a team. A researcher gathers data, a writer drafts the report, an editor polishes it. Each has a role, tools, and memory. A supervisor (or graph) routes tasks between them.</p>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h4>For Beginners</h4>
+                <ul>
+                  <li>Try CrewAI with pre-built crews</li>
+                  <li>Define 2-3 clear roles with backstories</li>
+                  <li>Start linear, add loops later</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Engineer Details</h4>
+                <ul>
+                  <li>Supervisor pattern: central router + workers</li>
+                  <li>LangGraph for cyclic / conditional flows</li>
+                  <li>Shared state / scratchpads between agents</li>
+                  <li>Human-in-the-loop interrupts for approvals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 5 -->
+      <div class="stage-card fade-up" data-stage="5">
+        <div class="stage-header" onclick="toggleStage(5)">
+          <div class="stage-num n5">05</div>
+          <div class="stage-title-wrap">
+            <h3>Agent Swarm</h3>
+            <span>Agents debate, review, and self-correct</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-inner">
+            <div class="stage-visual">
+              <span class="entity ai">💡 Proposer</span>
+              <span class="entity ai">🧐 Critic</span>
+              <span class="entity ai">🔧 Fixer</span>
+              <span class="entity ai">✅ Judge</span>
+              <span style="margin-left:auto" class="entity">Best Answer</span>
+            </div>
+            <p class="stage-desc">Multiple agents compete or collaborate to find the best answer. One proposes a solution, another critiques it, a third fixes the flaws, and a judge picks the winner. This dramatically improves quality on complex reasoning tasks.</p>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h4>For Beginners</h4>
+                <ul>
+                  <li>AutoGen group chats feel like Slack debates</li>
+                  <li>Set up a "red team" agent to challenge answers</li>
+                  <li>Use for high-stakes decisions: strategy, code review</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Engineer Details</h4>
+                <ul>
+                  <li>Debate / Critic pattern: generate → critique → revise</li>
+                  <li>Consensus algorithms: voting, confidence scoring</li>
+                  <li>AutoGen <code>GroupChat</code> with selector function</li>
+                  <li>Cost explodes linearly with agents — use sparingly</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 6 -->
+      <div class="stage-card fade-up" data-stage="6">
+        <div class="stage-header" onclick="toggleStage(6)">
+          <div class="stage-num n6">06</div>
+          <div class="stage-title-wrap">
+            <h3>Autonomous Organization</h3>
+            <span>AI workers managing other AI workers</span>
+          </div>
+          <div class="stage-toggle">▼</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-inner">
+            <div class="stage-visual">
+              <span class="entity ai">📋 Planner</span>
+              <span class="arrow">→</span>
+              <span class="entity ai">👷 5 Workers</span>
+              <span class="arrow">→</span>
+              <span class="entity ai">📊 Evaluator</span>
+              <span class="arrow">↻</span>
+              <span class="entity ai">📋 Planner</span>
+            </div>
+            <p class="stage-desc">The AI designs its own org chart. A planner breaks goals into subtasks, delegates to worker agents, evaluates results, and replans if needed. Humans set the mission and guardrails; the system handles execution.</p>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h4>For Beginners</h4>
+                <ul>
+                  <li>Not production-ready for most businesses yet</li>
+                  <li>Best for R&D, content pipelines, or codebases</li>
+                  <li>Requires strong observability and kill-switches</li>
+                </ul>
+              </div>
+              <div class="detail-box">
+                <h4>Engineer Details</h4>
+                <ul>
+                  <li>Meta-agent architecture: agent that creates agents</li>
+                  <li>Hierarchical planning with Hierarchical Task Networks</li>
+                  <li>Self-evaluation loops + reward models</li>
+                  <li>Observability: LangSmith, Weights & Biases, OpenTelemetry</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PATTERNS ═══ -->
+<section class="section" id="patterns">
+  <div class="container">
+    <div class="section-title fade-up"><span class="line-left"></span>Orchestration Patterns<span class="line"></span></div>
+    <p class="fade-up mb-32" style="color:var(--text-2);max-width:640px;">How you wire agents together matters more than how smart each one is. These are the three dominant patterns in production.</p>
+
+    <div class="patterns">
+      <div class="pattern-card fade-up">
+        <div class="icon">🎯</div>
+        <h3>Supervisor</h3>
+        <p>A central supervisor receives the request, breaks it into subtasks, and delegates to specialized worker agents. The supervisor validates outputs and synthesizes the final answer. Most common production pattern — simple and debuggable.</p>
+      </div>
+      <div class="pattern-card fade-up">
+        <div class="icon">⚡</div>
+        <h3>Debate / Critic</h3>
+        <p>One agent proposes, another critiques, a third revises. Repeat until consensus or max rounds. Used for high-stakes tasks like code review, strategy, or medical reasoning. Quality goes up; cost goes up linearly.</p>
+      </div>
+      <div class="pattern-card fade-up">
+        <div class="icon">🐝</div>
+        <h3>Swarm</h3>
+        <p>Many lightweight agents work in parallel on subtasks, then aggregate results. Great for search, data collection, or brute-force exploration. Think MapReduce but with reasoning agents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FRAMEWORKS ═══ -->
+<section class="section" id="frameworks">
+  <div class="container">
+    <div class="section-title fade-up"><span class="line-left"></span>Frameworks<span class="line"></span></div>
+    <p class="fade-up mb-32" style="color:var(--text-2);max-width:640px;">Pick the framework that matches your team's skill level and the complexity of your workflow.</p>
+
+    <div style="overflow-x:auto" class="fade-up">
+      <table class="frameworks-table">
+        <thead>
+          <tr>
+            <th>Framework</th>
+            <th>Best For</th>
+            <th>Pattern</th>
+            <th>Learning Curve</th>
+            <th>Production</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="fw-name">CrewAI <span class="fw-tag">Beginner</span></div></td>
+            <td data-label="Best For">Rapid prototypes, role-based teams, readable configs</td>
+            <td data-label="Pattern">Role-based crew with tasks</td>
+            <td data-label="Learning">Low — YAML-like agent defs</td>
+            <td data-label="Production">Good for linear flows</td>
+          </tr>
+          <tr>
+            <td><div class="fw-name">LangGraph <span class="fw-tag best">Engineers</span></div></td>
+            <td data-label="Best For">Cyclic workflows, branching logic, heavy observability</td>
+            <td data-label="Pattern">Graph nodes = agents/tools</td>
+            <td data-label="Learning">Medium — graph mental model</td>
+            <td data-label="Production">Best for complex stateful flows</td>
+          </tr>
+          <tr>
+            <td><div class="fw-name">AutoGen</div></td>
+            <td data-label="Best For">Conversational debates, group chats, consensus</td>
+            <td data-label="Pattern">GroupChat + selector</td>
+            <td data-label="Learning">Medium — conversation-driven</td>
+            <td data-label="Production">Great for multi-turn dialogue</td>
+          </tr>
+          <tr>
+            <td><div class="fw-name">OpenAI Agents SDK</div></td>
+            <td data-label="Best For">Minimal abstractions, raw control, OpenAI-native</td>
+            <td data-label="Pattern">Agent + handoffs</td>
+            <td data-label="Learning">Low — thin wrapper</td>
+            <td data-label="Production">New but promising</td>
+          </tr>
+          <tr>
+            <td><div class="fw-name">Google ADK</div></td>
+            <td data-label="Best For">Google Cloud shops, Vertex AI integration</td>
+            <td data-label="Pattern">Multi-agent + tools</td>
+            <td data-label="Learning">Medium</td>
+            <td data-label="Production">Early, Google-centric</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MCP ═══ -->
+<section class="section" id="mcp">
+  <div class="container">
+    <div class="section-title fade-up"><span class="line-left"></span>MCP & Tools<span class="line"></span></div>
+    <div class="mcp-card fade-up">
+      <h3>Model Context Protocol (MCP)</h3>
+      <p class="mb-16">Think of MCP as "USB-C for AI tools." Introduced by Anthropic in late 2024, it's an open standard that lets any AI agent securely connect to any data source or tool — your filesystem, a database, Slack, GitHub, or a browser — without custom integrations for each pair.</p>
+      <p>Instead of writing a new connector for every tool, you build (or use) an MCP server once, and any MCP-compatible agent can plug into it. This is what made production-grade agents actually possible in 2025.</p>
+      <div class="mt-16" style="display:flex;gap:12px;flex-wrap:wrap;">
+        <span class="entity tool">🌐 Browser Use — agents browse the web</span>
+        <span class="entity tool">🗄️ Database MCP — SQL via natural language</span>
+        <span class="entity tool">📁 Filesystem MCP — read/write local files</span>
+        <span class="entity tool">💬 Slack MCP — send/receive messages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section" style="text-align:center;padding-top:40px;">
+  <div class="container">
+    <div class="fade-up">
+      <h2 class="gradient-text" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin-bottom:20px;">This Is Just the Beginning</h2>
+      <p style="color:var(--text-2);max-width:520px;margin:0 auto 32px;">Agentic AI is moving fast. This roadmap will evolve as new frameworks, patterns, and research emerge. Star the repo to follow along.</p>
+      <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="btn btn-primary" target="_blank">⭐ Star on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Built by <a href="https://github.com/jlaiii" target="_blank">jlaiii</a> · <a href="https://github.com/jlaiii/agentic-ai-roadmap" target="_blank">agentic-ai-roadmap</a> · Living research</p>
+  </div>
+</footer>
+
+<script>
+/* ── Particles ── */
+const canvas=document.getElementById('bgCanvas'), ctx=canvas.getContext('2d');
+let particles=[], COUNT=window.matchMedia('(pointer:coarse)').matches?25:60;
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();addEventListener('resize',resize);
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*1.5+.5;this.a=Math.random()*.3+.05;this.c=Math.random()>.6?'#6366f1':Math.random()>.5?'#ec4899':'#06b6d4'}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.c;ctx.globalAlpha=this.a;ctx.fill();ctx.globalAlpha=1}}
+for(let i=0;i<COUNT;i++)particles.push(new Particle());
+let mx=0,my=0;addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach((p,i)=>{p.update();p.draw();for(let j=i+1;j<particles.length;j++){let dx=p.x-particles[j].x,dy=p.y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='#6366f1';ctx.globalAlpha=(1-d/100)*.06;ctx.lineWidth=.5;ctx.stroke();ctx.globalAlpha=1}}let dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<120){let f=(120-d)/120;p.vx+=(dx/d)*f*.015;p.vy+=(dy/d)*f*.015}});requestAnimationFrame(anim)}
+anim();
+
+/* ── Cursor ── */
+const cursor=document.getElementById('cursor'),ring=cursor.querySelector('.cursor-ring'),dot=cursor.querySelector('.cursor-dot');
+let cx=0,cy=0,rx=0,ry=0;
+if(!window.matchMedia('(pointer:coarse)').matches){
+  addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px'});
+  function cAnim(){rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(cAnim)}
+  cAnim();
+  document.querySelectorAll('a,button,.btn,.stage-header,.pattern-card').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'))});
+}
+
+/* ── Scroll reveal ── */
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up,.section-title').forEach(el=>obs.observe(el));
+
+/* ── Nav scroll ── */
+const nav=document.getElementById('navbar');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+
+/* ── Stage toggles ── */
+function toggleStage(n){document.querySelectorAll('.stage-card').forEach(c=>{if(+c.dataset.stage===n){c.classList.toggle('active')}else{c.classList.remove('active')}});}
+// Open stage 3 by default
+document.querySelector('[data-stage="3"]').classList.add('active');
+
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'})}));
+</script>
+</body>
+</html>
