@@ -6,7 +6,7 @@ A human-friendly research guide to building and deploying agentic AI systems —
 
 ## What This Is
 
-This is a living research project. It breaks down the evolution of AI agents into 6 clear stages anyone can understand, then shows you exactly how to build and deploy each level — whether you're a beginner or an engineer.
+This is a living research project. It starts with the transformer engine that powers every agent, then breaks down the evolution of AI agents into 6 clear stages anyone can understand — from simple chatbots all the way to autonomous AI workers that manage themselves.
 
 ## The 6 Stages
 
@@ -18,6 +18,8 @@ This is a living research project. It breaks down the evolution of AI agents int
 6. **Autonomous Organization** — AI workers manage other AI workers with minimal human oversight.
 
 ## Topics Covered
+
+- **The Transformer Engine** — how LLMs actually work: attention mechanism, next-token prediction, parameters vs tokens, pre-training → fine-tuning → RLHF, and why this matters for agents
 
 - **6 Stages** of agentic maturity with engineer and beginner paths
 - **3 Orchestration Patterns**: Supervisor, Debate/Critic, Swarm

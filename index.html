@@ -425,23 +425,24 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">Agentic<span>AI</span></div>
-  <div class="sidebar-sub">v2.4 &mdash; May 2026</div>
+  <div class="sidebar-sub">v2.5 &mdash; May 2026</div>
 
   <div class="nav-section">Navigate</div>
   <ul class="nav-links">
     <li><a href="#overview" class="active" onclick="setActive(this)"><span class="num">00</span>Overview</a></li>
-    <li><a href="#stages" onclick="setActive(this)"><span class="num">01</span>The 6 Stages</a></li>
-    <li><a href="#patterns" onclick="setActive(this)"><span class="num">02</span>Patterns</a></li>
-    <li><a href="#frameworks" onclick="setActive(this)"><span class="num">03</span>Frameworks</a></li>
-    <li><a href="#protocols" onclick="setActive(this)"><span class="num">04</span>Protocols</a></li>
-    <li><a href="#harnesses" onclick="setActive(this)"><span class="num">05</span>Harnesses</a></li>
-    <li><a href="#blackbox" onclick="setActive(this)"><span class="num">06</span>The Black Box</a></li>
-    <li><a href="#agi" onclick="setActive(this)"><span class="num">07</span>AGI</a></li>
-    <li><a href="#teaching" onclick="setActive(this)"><span class="num">08</span>Teaching</a></li>
-    <li><a href="#models" onclick="setActive(this)"><span class="num">09</span>Models</a></li>
-    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">10</span>Evaluation</a></li>
-    <li><a href="#reality" onclick="setActive(this)"><span class="num">11</span>Production Reality</a></li>
-    <li><a href="#history" onclick="setActive(this)"><span class="num">12</span>History</a></li>
+    <li><a href="#engine" onclick="setActive(this)"><span class="num">01</span>The Engine</a></li>
+    <li><a href="#stages" onclick="setActive(this)"><span class="num">02</span>The 6 Stages</a></li>
+    <li><a href="#patterns" onclick="setActive(this)"><span class="num">03</span>Patterns</a></li>
+    <li><a href="#frameworks" onclick="setActive(this)"><span class="num">04</span>Frameworks</a></li>
+    <li><a href="#protocols" onclick="setActive(this)"><span class="num">05</span>Protocols</a></li>
+    <li><a href="#harnesses" onclick="setActive(this)"><span class="num">06</span>Harnesses</a></li>
+    <li><a href="#blackbox" onclick="setActive(this)"><span class="num">07</span>The Black Box</a></li>
+    <li><a href="#agi" onclick="setActive(this)"><span class="num">08</span>AGI</a></li>
+    <li><a href="#teaching" onclick="setActive(this)"><span class="num">09</span>Teaching</a></li>
+    <li><a href="#models" onclick="setActive(this)"><span class="num">10</span>Models</a></li>
+    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">11</span>Evaluation</a></li>
+    <li><a href="#reality" onclick="setActive(this)"><span class="num">12</span>Production Reality</a></li>
+    <li><a href="#history" onclick="setActive(this)"><span class="num">13</span>History</a></li>
   </ul>
 
   <div class="nav-section">Resources</div>
@@ -475,6 +476,7 @@
       <h1>From Chatbots to <em>Autonomous Workers</em></h1>
       <p>A human-friendly roadmap for understanding, building, and deploying agentic AI systems — whether you're a beginner exploring the idea or an engineer wiring up multi-agent swarms.</p>
       <div class="hero-meta">
+        <span>● 1 Transformer Deep Dive</span>
         <span>● 6 Stages</span>
         <span>● 3 Patterns</span>
         <span>● 8 Frameworks</span>
@@ -488,11 +490,59 @@
     </div>
   </section>
 
+  <section class="section" id="engine">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2>The Transformer Engine</h2>
+      </div>
+      <p class="section-intro reveal">Before you build agents, you need to know what powers them. Every agent on this roadmap runs on the same underlying architecture: the transformer. Here is how it actually works — no PhD required.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">Paper</div>
+          <h3>Attention Is All You Need (2017)</h3>
+          <p>Google Brain published the transformer architecture and changed everything. Before transformers, models processed words one at a time (RNNs). Transformers use <strong>self-attention</strong> to look at an entire sentence simultaneously and learn which words matter most to each other. This parallelization is why modern LLMs can train on trillions of tokens on GPU clusters.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">Core Mechanic</div>
+          <h3>Next-Token Prediction</h3>
+          <p>At its core, an LLM is a statistical autocomplete machine. Given <em>"The cat sat on the..."</em> it calculates probabilities for every word in its vocabulary and picks the most likely next token. Repeat this 500 times and you get an essay. The "intelligence" is not a reasoning module — it is pattern matching at a scale so large that reasoning emerges as a side effect.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Scale</div>
+          <h3>Parameters = Knowledge Compression</h3>
+          <p>GPT-4 has ~1.8 trillion parameters. Claude 3 has ~175 billion. Each parameter is a tuned weight in a massive neural network. More parameters = more capacity to memorize patterns, but also more compute to run. The <strong>Densing Law</strong> (Nature, 2025) shows that for equivalent performance, parameter requirements decrease <em>exponentially</em> over time — smaller, cheaper models are catching up fast.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Unit of Work</div>
+          <h3>Tokens, Not Words</h3>
+          <p>LLMs do not read words — they read tokens. "ChatGPT" might be 3 tokens: <code>Chat</code>, <code>G</code>, <code>PT</code>. A typical English sentence is ~15 tokens. Context windows (how much text the model can "see" at once) have grown from 2K tokens (GPT-3) to 256K (Kimi K2.6) to 1M+ (Gemini 2.5 Pro). Longer context means an agent can ingest entire codebases, research papers, or hours of conversation history in one shot.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Pipeline</div>
+          <h3>Pre-training → Fine-tuning → RLHF</h3>
+          <p>First, the model is trained on ~10TB of internet text (<strong>pre-training</strong>) to learn grammar, facts, and reasoning patterns. Then it is fine-tuned on curated dialog data. Finally, <strong>RLHF</strong> (Reinforcement Learning from Human Feedback) aligns the model with human preferences — making it helpful, harmless, and honest. This is why base models are raw and chat models are polite. It is also where output filtering and guardrails are baked in.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Agent Relevance</div>
+          <h3>Why This Matters for Agents</h3>
+          <p>An agent is not a different architecture — it is the same transformer wrapped in a <strong>loop</strong>. The LLM generates a plan → the harness executes tool calls → results feed back into context → the LLM generates the next step. The transformer is the brain; the harness is the body. Understanding the engine helps you understand the hard limits: context length caps memory, inference speed determines real-time responsiveness, and parameter count affects reasoning depth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Stages -->
   <section class="section" id="stages">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">01</span>
+        <span class="section-num">02</span>
         <h2>The 6 Stages</h2>
       </div>
       <p class="section-intro reveal">Each stage adds a new capability. You don't need to jump to the end — most real-world value today comes from Stage 3 and 4.</p>
@@ -762,7 +812,7 @@
   <section class="section" id="patterns">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">02</span>
+        <span class="section-num">03</span>
         <h2>Orchestration Patterns</h2>
       </div>
       <p class="section-intro reveal">How you wire agents together matters more than how smart each one is. These are the three dominant patterns in production.</p>
@@ -797,7 +847,7 @@
   <section class="section" id="frameworks">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">03</span>
+        <span class="section-num">04</span>
         <h2>Frameworks</h2>
       </div>
       <p class="section-intro reveal">Pick the framework that matches your team's skill level and the complexity of your workflow. Stats are live from GitHub.</p>
@@ -900,7 +950,7 @@
   <section class="section" id="protocols">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">04</span>
+        <span class="section-num">05</span>
         <h2>Protocols</h2>
       </div>
       <p class="section-intro reveal">Two competing standards are shaping how agents talk to tools and to each other. Understanding both matters.</p>
@@ -937,7 +987,7 @@
   <section class="section" id="harnesses">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">05</span>
+        <span class="section-num">06</span>
         <h2>Agent Harnesses</h2>
       </div>
       <p class="section-intro reveal">
@@ -1035,7 +1085,7 @@
   <section class="section" id="blackbox">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">06</span>
+        <span class="section-num">07</span>
         <h2>The Black Box</h2>
       </div>
       <p class="section-intro reveal">
@@ -1086,7 +1136,7 @@
   <section class="section" id="agi">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">07</span>
+        <span class="section-num">08</span>
         <h2>AGI: Artificial General Intelligence</h2>
       </div>
       <p class="section-intro reveal">
@@ -1145,7 +1195,7 @@
   <section class="section" id="teaching">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">08</span>
+        <span class="section-num">09</span>
         <h2>Agent Teaching &amp; Context Engineering</h2>
       </div>
       <p class="section-intro reveal">
@@ -1205,7 +1255,7 @@
   <section class="section" id="models">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">09</span>
+        <span class="section-num">10</span>
         <h2>Models I've Tested</h2>
       </div>
       <p class="section-intro reveal">
@@ -1270,7 +1320,7 @@
   <section class="section" id="evaluation">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">10</span>
+        <span class="section-num">11</span>
         <h2>Evaluation</h2>
       </div>
       <p class="section-intro reveal">
@@ -1334,7 +1384,7 @@
   <section class="section" id="reality">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">11</span>
+        <span class="section-num">12</span>
         <h2>Production Reality</h2>
       </div>
       <p class="section-intro reveal">The blog posts don't talk about this. Here's what actually matters when you ship.</p>
@@ -1384,7 +1434,7 @@
   <section class="section" id="history">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">12</span>
+        <span class="section-num">13</span>
         <h2>History</h2>
       </div>
       <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here — from the first GPT to the models you're using today.</p>
@@ -1550,7 +1600,7 @@
   }
 
   // Scroll spy
-  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'agi', 'teaching', 'models', 'evaluation', 'reality', 'history'];
+  const sections = ['overview', 'engine', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'agi', 'teaching', 'models', 'evaluation', 'reality', 'history'];
   addEventListener('scroll', () => {
     let current = 'overview';
     for (const id of sections) {
