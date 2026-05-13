@@ -36,6 +36,7 @@ This is a living research project. It breaks down the evolution of AI agents int
   - **OpenClaw** (371,497 ★) — fastest-growing agent project, personal AI on any device, live Canvas, voice
   - **OpenManus** (56,233 ★) — MetaGPT team's open agent with RL training pipeline
 - **The Black Box** — why we don't understand how LLMs work, emergent behavior, and how output filtering (RLHF, guardrails) is our duct-tape fix
+- **AGI: Artificial General Intelligence** — what AGI actually means, why it's not about consciousness, why people conflate the two, and personal observations of emergent agent behavior
 - **5 Models I've Tested**:
   - **OpenAI Codex** (82,325 ★ repo) — terminal coding agent, April 2025
   - **Claude Code** (181,106 ★ resources) — Anthropic's terminal agent with Kairos memory
