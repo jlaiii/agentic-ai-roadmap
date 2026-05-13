@@ -435,9 +435,11 @@
     <li><a href="#frameworks" onclick="setActive(this)"><span class="num">03</span>Frameworks</a></li>
     <li><a href="#protocols" onclick="setActive(this)"><span class="num">04</span>Protocols</a></li>
     <li><a href="#harnesses" onclick="setActive(this)"><span class="num">05</span>Harnesses</a></li>
-    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">06</span>Evaluation</a></li>
-    <li><a href="#reality" onclick="setActive(this)"><span class="num">07</span>Production Reality</a></li>
-    <li><a href="#timeline" onclick="setActive(this)"><span class="num">08</span>Timeline</a></li>
+    <li><a href="#blackbox" onclick="setActive(this)"><span class="num">06</span>The Black Box</a></li>
+    <li><a href="#models" onclick="setActive(this)"><span class="num">07</span>Models</a></li>
+    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">08</span>Evaluation</a></li>
+    <li><a href="#reality" onclick="setActive(this)"><span class="num">09</span>Production Reality</a></li>
+    <li><a href="#history" onclick="setActive(this)"><span class="num">10</span>History</a></li>
   </ul>
 
   <div class="nav-section">Resources</div>
@@ -475,7 +477,8 @@
         <span>● 3 Patterns</span>
         <span>● 8 Frameworks</span>
         <span>● 2 Protocols</span>
-        <span>● 2 Harnesses</span>
+        <span>● 3 Harnesses</span>
+        <span>● 5 Models Tested</span>
         <span>● Updated May 2026</span>
       </div>
     </div>
@@ -953,6 +956,18 @@
         </div>
         <div class="fw-card reveal">
           <div class="tag-row">
+            <span class="tag platform">Personal AI</span>
+            <span class="stars">★ 371,497</span>
+          </div>
+          <h3>OpenClaw</h3>
+          <p>The fastest-growing AI agent project in GitHub history. A personal AI assistant you run on your own devices. Answers on the channels you already use. Can speak and listen on macOS/iOS/Android. Renders a live Canvas you control. Cross-platform with a growing community building skills.</p>
+          <div class="meta">
+            Platforms: macOS, iOS, Android, Web <br>
+            Unique: Live Canvas, voice, 371K stars in weeks
+          </div>
+        </div>
+        <div class="fw-card reveal">
+          <div class="tag-row">
             <span class="tag experimental">Open Source</span>
             <span class="stars">★ 56,233</span>
           </div>
@@ -1012,11 +1027,127 @@
     </div>
   </section>
 
+  <!-- The Black Box -->
+  <section class="section" id="blackbox">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">06</span>
+        <h2>The Black Box</h2>
+      </div>
+      <p class="section-intro reveal">
+        Here's the uncomfortable truth nobody building these systems wants to admit: we don't actually know how they work.
+      </p>
+
+      <div class="pattern-list">
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🕳️</div>
+          <div class="pattern-body">
+            <h3>What "Black Box" Actually Means</h3>
+            <p>A modern LLM has hundreds of billions of parameters arranged in dense neural networks. You feed it tokens, it feeds you tokens. But what happens between input and output? Nobody can fully trace it. Not the researchers who built it. Not the companies shipping it. The model's "thinking" is emergent — behaviors that weren't explicitly programmed arise from the sheer scale of the computation.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🔮</div>
+          <div class="pattern-body">
+            <h3>Emergent Behavior at Scale</h3>
+            <p>At around 10–100 billion parameters, models suddenly develop capabilities they weren't explicitly trained for: in-context learning, chain-of-thought reasoning, following complex instructions. These abilities <em>emerge</em> — they weren't in the training data as explicit patterns. We observe them, but we don't understand the mechanism. We can't predict what emergent behavior a 2-trillion-parameter model will have.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🛡️</div>
+          <div class="pattern-body">
+            <h3>How We "Fix" It: Output Filtering</h3>
+            <p>Since we can't look inside and understand the reasoning, we put a filter on the <strong>output</strong>. RLHF (Reinforcement Learning from Human Feedback) trains a reward model that scores outputs as "good" or "bad." The LLM then learns to produce outputs that score well. System prompts, guardrails, and content policies are all filters sitting between the black box and the user. We're duct-taping controls onto a system we don't fundamentally understand.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">⚠️</div>
+          <div class="pattern-body">
+            <h3>Why This Matters for Agents</h3>
+            <p>When an agent is browsing the web, executing code, and making decisions on your behalf, you are trusting a black box. It might hallucinate a command. It might decide a destructive action is "logical." The output filter (guardrails, human approval gates) is your only line of defense. You can't audit what you can't see.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🔬</div>
+          <div class="pattern-body">
+            <h3>The Research Frontier</h3>
+            <p>Anthropic's interpretability research (mechanistic interpretability) is trying to reverse-engineer what happens inside Claude. They're mapping specific neurons to specific concepts — like finding a "Golden Gate Bridge" neuron. But we're years away from <em>understanding</em> these systems the way we understand a calculator. Until then, the black box problem is the defining engineering challenge of the field.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Models -->
+  <section class="section" id="models">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">07</span>
+        <h2>Models I've Tested</h2>
+      </div>
+      <p class="section-intro reveal">
+        These are the models I've personally used and tested for agentic work. The landscape changes fast — what's best today might be outdated next quarter.
+      </p>
+
+      <div class="fw-grid">
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag platform">OpenAI</span>
+            <span class="stars">82,325 ★ repo</span>
+          </div>
+          <h3>OpenAI Codex</h3>
+          <p>Released April 2025. Lightweight coding agent that runs in your terminal. Available via CLI, desktop app (Windows/macOS), and IDE integrations. In March 2026, OpenAI added Codex Security — an app-sec agent for vulnerability scanning. Fast, reliable tool-calling. Best for code-heavy agent workflows.</p>
+          <div class="meta">Best for: Terminal coding, IDE integration</div>
+        </div>
+
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag platform">Anthropic</span>
+            <span class="stars">181,106 ★ resource repo</span>
+          </div>
+          <h3>Claude Code</h3>
+          <p>Anthropic's terminal-native agent. Uses Claude Sonnet under the hood. Strong reasoning, excellent at multi-file code changes. Includes Kairos memory optimization and a buddy system for parallel task teams (in v2.1.88+). Released as a TypeScript SDK and Python SDK for embedding in custom tools.</p>
+          <div class="meta">Best for: Complex reasoning, multi-file editing</div>
+        </div>
+
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag platform">Google</span>
+            <span class="stars">103,860 ★ repo</span>
+          </div>
+          <h3>Gemini CLI (Google)</h3>
+          <p>Released June 2025 as an open-source terminal agent under Apache 2.0. Access to Gemini 3 models with 1M token context window. 60 req/min free tier with personal Google account. Code Assist Enterprise integration. Grew ~15k stars/day at launch. Best for Google Cloud shops and long-context tasks.</p>
+          <div class="meta">Best for: Long context, Google Cloud integration</div>
+        </div>
+
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag experimental">Moonshot AI</span>
+            <span class="stars">Open-weight</span>
+          </div>
+          <h3>Kimi K2.6</h3>
+          <p>Released April 2026. A trillion-parameter open-weight model from Moonshot AI. Claims state-of-the-art in coding, long-horizon execution, and agent swarms. 256K context window (Hermes config shows many fresh installs default to 128K — don't forget to bump it). Excellent tool-calling reliability. Best for self-hosted agents.</p>
+          <div class="meta">Best for: Agent swarms, self-hosting, coding</div>
+        </div>
+
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag experimental">DeepSeek</span>
+            <span class="stars">MIT License</span>
+          </div>
+          <h3>DeepSeek R1 / V3</h3>
+          <p>R1 dropped January 2025 — matching OpenAI's o1 on math benchmarks, fully open-source, with distilled versions running on a single consumer GPU. V3 came December 2024: 671B parameter MoE with 37B active per token. V3.1 and V3.2 followed in 2025. The V3-0324 update (March 2025) was the first open model to outperform all proprietary non-reasoning models. MIT licensed.</p>
+          <div class="meta">Best for: Local inference, reasoning, cost-saving</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Evaluation -->
   <section class="section" id="evaluation">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">06</span>
+        <span class="section-num">08</span>
         <h2>Evaluation</h2>
       </div>
       <p class="section-intro reveal">
@@ -1080,7 +1211,7 @@
   <section class="section" id="reality">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">07</span>
+        <span class="section-num">09</span>
         <h2>Production Reality</h2>
       </div>
       <p class="section-intro reveal">The blog posts don't talk about this. Here's what actually matters when you ship.</p>
@@ -1130,61 +1261,117 @@
   <section class="section" id="timeline">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">08</span>
-        <h2>Timeline</h2>
+        <span class="section-num">10</span>
+        <h2>History</h2>
       </div>
-      <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here.</p>
+      <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here — from the first GPT to the models you're using today.</p>
 
       <div class="timeline reveal">
+        <!-- Model Evolution -->
+        <div class="t-item">
+          <div class="t-date">Jun 2018</div>
+          <div class="t-title">GPT-1: The Transformer Era Begins</div>
+          <div class="t-desc">OpenAI releases GPT-1 with 117M parameters. Unsupervised pre-training on text proves transformers can learn language structure. Nobody imagines what scale will unlock.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Feb 2019</div>
+          <div class="t-title">GPT-2: Too Dangerous to Release?</div>
+          <div class="t-desc">1.5B parameters. OpenAI initially withholds the full model, fearing misuse. First hint that scale changes everything — the model can write coherent essays, news articles, and fiction.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Jun 2020</div>
+          <div class="t-title">GPT-3: 175B Parameters, "Emergence"</div>
+          <div class="t-desc">The scale threshold is crossed. Few-shot learning emerges — the model can perform tasks it was never explicitly trained on, just from examples in the prompt. The black box problem becomes real.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Mar 2022</div>
+          <div class="t-title">InstructGPT: RLHF Goes Mainstream</div>
+          <div class="t-desc">OpenAI introduces Reinforcement Learning from Human Feedback. Instead of predicting the next token from raw internet text, the model learns what <em>humans</em> prefer. The output filter approach is born.</div>
+        </div>
         <div class="t-item">
           <div class="t-date">Nov 2022</div>
-          <div class="t-title">ChatGPT launches</div>
-          <div class="t-desc">The world meets conversational AI. Stage 1 becomes mainstream overnight.</div>
+          <div class="t-title">ChatGPT Launches (GPT-3.5)</div>
+          <div class="t-desc">The world meets conversational AI. Stage 1 becomes mainstream overnight. 100M users in 2 months. Everyone realizes this isn't just autocomplete anymore.</div>
         </div>
         <div class="t-item">
           <div class="t-date">Mar 2023</div>
-          <div class="t-title">GPT-4 + Code Interpreter</div>
-          <div class="t-desc">AI can write and execute code. Stage 3 (Agent) becomes possible for the first time.</div>
+          <div class="t-title">GPT-4 + Claude 1 Drop</div>
+          <div class="t-desc">OpenAI ships GPT-4 with "sparks of AGI" claims. Anthropic releases Claude 1 the same month. Anthropic's constitutional AI approach offers an alternative to pure RLHF. The race is on.</div>
         </div>
         <div class="t-item">
-          <div class="t-date">Oct 2023</div>
-          <div class="t-title">AutoGen &amp; CrewAI emerge</div>
-          <div class="t-desc">Microsoft's AutoGen and CrewAI introduce multi-agent teams. Stage 4 goes open source.</div>
+          <div class="t-date">Jul 2023</div>
+          <div class="t-title">Claude 2: 100K Context Window</div>
+          <div class="t-desc">Anthropic pushes context to 100K tokens. For the first time, an LLM can read an entire book in one pass. This changes what agents can do with memory.</div>
         </div>
         <div class="t-item">
-          <div class="t-date">Jan 2024</div>
-          <div class="t-title">LangGraph released</div>
-          <div class="t-desc">LangChain team ships graph-based agent workflows. Cyclic state machines for agents.</div>
+          <div class="t-date">Dec 2023</div>
+          <div class="t-title">Gemini 1.0 (Google DeepMind)</div>
+          <div class="t-desc">Google's answer to GPT-4. Multimodal from day one — text, image, audio, video. Three sizes: Ultra, Pro, Nano. The first real competitor with a different architectural approach.</div>
         </div>
         <div class="t-item">
-          <div class="t-date">Nov 2024</div>
-          <div class="t-title">Anthropic launches MCP</div>
-          <div class="t-desc">Model Context Protocol drops. The "USB-C for AI tools" moment. Agent tooling explodes.</div>
+          <div class="t-date">Mar 2024</div>
+          <div class="t-title">Claude 3 (Haiku, Sonnet, Opus)</div>
+          <div class="t-desc">Anthropic introduces the three-tier model family. Opus handles the hardest tasks, Sonnet is the workhorse, Haiku is fast and cheap. Constitutional AI is now the default training approach.</div>
         </div>
         <div class="t-item">
-          <div class="t-date">Mar 2025</div>
-          <div class="t-title">OpenAI Agents SDK</div>
-          <div class="t-desc">OpenAI ships a minimal, official framework. No more guessing at primitives.</div>
+          <div class="t-date">May 2024</div>
+          <div class="t-title">GPT-4o: Multimodal, Real-Time</div>
+          <div class="t-desc">OpenAI ships a single model that reasons across audio, vision, and text in real time. Lower latency, lower cost. The foundation for voice-based agents.</div>
         </div>
         <div class="t-item">
-          <div class="t-date">Apr 2025</div>
-          <div class="t-title">Google A2A Protocol</div>
-          <div class="t-desc">Google responds with Agent-to-Agent protocol. The standards war begins: MCP vs. A2A.</div>
+          <div class="t-date">Jun 2024</div>
+          <div class="t-title">Claude 3.5 Sonnet</div>
+          <div class="t-desc">Anthropic ships a mid-tier model that outperforms the previous flagship (Opus). This becomes the new standard for agentic coding work.</div>
         </div>
         <div class="t-item">
-          <div class="t-date">May 2025</div>
-          <div class="t-title">Browser Use hits 50k stars</div>
-          <div class="t-desc">Agent web automation goes mainstream. 93k stars by mid-2026.</div>
+          <div class="t-date">Sep 2024</div>
+          <div class="t-title">o1: Chain-of-Thought Goes Internal</div>
+          <div class="t-desc">OpenAI introduces a model that "thinks" before answering — internal chain-of-thought processing. Math, coding, and scientific reasoning jump dramatically. The model now has <em>two</em> black boxes: the think step and the answer step.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Dec 2024</div>
+          <div class="t-title">DeepSeek V3: Open-Source MoE</div>
+          <div class="t-desc">671B parameter Mixture-of-Experts, only 37B active per token. The first open-weight model to genuinely compete with GPT-4o on performance-per-dollar.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Jan 2025</div>
+          <div class="t-title">DeepSeek R1: O1 for Free</div>
+          <div class="t-desc">Open-source reasoning model matching o1 on math benchmarks. MIT licensed. Distilled versions run on a single consumer GPU. The open-source movement catches up.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Jan 2025</div>
+          <div class="t-title">Claude 3.5 Sonnet v2 (Computer Use)</div>
+          <div class="t-desc">Anthropic adds computer use to Claude 3.5 Sonnet. The model can now see your screen, move your mouse, and click. First major agentic capability in a frontier model.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Feb 2025</div>
+          <div class="t-title">Claude 3.7 Sonnet</div>
+          <div class="t-desc">Extended thinking mode with adjustable reasoning budgets. The model can spend more tokens thinking about harder problems. Agentic capabilities improved.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Jun 2025</div>
+          <div class="t-title">Gemini CLI Released</div>
+          <div class="t-desc">Google ships an open-source terminal agent under Apache 2.0. 1M token context, free tier. Grows ~15K stars/day at launch. Google finally enters the agent tooling space.</div>
         </div>
         <div class="t-item">
           <div class="t-date">Feb 2026</div>
-          <div class="t-title">Hermes Agent launches</div>
-          <div class="t-desc">Nous Research ships a self-improving agent suite with 40+ tools, model-agnostic support, and a learning loop. 148k stars by May 2026.</div>
+          <div class="t-title">Claude 4.6 Sonnet / Opus 4.7</div>
+          <div class="t-desc">Anthropic's Claude 4 family. Sonnet 4.6 for coding and agents. Opus 4.7 for advanced software engineering and complex workflows. The gap between tiers continues to shrink.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Feb 2026</div>
+          <div class="t-title">Hermes Agent Launches</div>
+          <div class="t-desc">Nous Research ships a self-improving agent suite with 40+ tools, model-agnostic support, and a learning loop. 148K stars by May 2026. Built by the people who built the models.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">Apr 2026</div>
+          <div class="t-title">Kimi K2.6: Trillion Parameters, Open</div>
+          <div class="t-desc">Moonshot AI releases a trillion-parameter open-weight model with state-of-the-art coding and agent swarm capabilities. 256K context. The Chinese labs are now competitive on frontier model quality.</div>
         </div>
         <div class="t-item">
           <div class="t-date">May 2026</div>
           <div class="t-title">This Roadmap</div>
-          <div class="t-desc">The field is converging. Harnesses (Hermes, OpenManus) run full machines. Platforms (Dify, n8n) absorb frameworks. Protocols (MCP, A2A) standardize interoperability. Evaluation becomes mandatory.</div>
+          <div class="t-desc">The field is converging. Harnesses (Hermes, OpenClaw, OpenManus) run full machines. Platforms (Dify, n8n) absorb frameworks. Protocols (MCP, A2A) standardize interoperability. Evaluation is mandatory. And we still don't understand how any of it works inside.</div>
         </div>
       </div>
     </div>
@@ -1240,7 +1427,7 @@
   }
 
   // Scroll spy
-  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'evaluation', 'reality', 'timeline'];
+  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'models', 'evaluation', 'reality', 'timeline'];
   addEventListener('scroll', () => {
     let current = 'overview';
     for (const id of sections) {

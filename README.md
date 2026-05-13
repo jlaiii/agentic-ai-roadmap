@@ -31,14 +31,22 @@ This is a living research project. It breaks down the evolution of AI agents int
   - LangGraph (31,955 ★) — graph-based workflows
   - OpenAI Agents SDK (26,272 ★) — minimal primitives
 - **2 Protocols**: MCP ("USB-C for AI tools") + A2A (Agent-to-Agent Protocol)
-- **2 Agent Harnesses** — full-suite systems that run your entire machine:
+- **3 Agent Harnesses** — full-suite systems that run your entire machine:
   - **Hermes Agent** (148,127 ★) — model-agnostic, self-improving, 40+ tools, multi-platform gateway, cron scheduling, subagents
+  - **OpenClaw** (371,497 ★) — fastest-growing agent project, personal AI on any device, live Canvas, voice
   - **OpenManus** (56,233 ★) — MetaGPT team's open agent with RL training pipeline
+- **The Black Box** — why we don't understand how LLMs work, emergent behavior, and how output filtering (RLHF, guardrails) is our duct-tape fix
+- **5 Models I've Tested**:
+  - **OpenAI Codex** (82,325 ★ repo) — terminal coding agent, April 2025
+  - **Claude Code** (181,106 ★ resources) — Anthropic's terminal agent with Kairos memory
+  - **Gemini CLI** (103,860 ★) — Google's open-source terminal agent, June 2025
+  - **Kimi K2.6** — Moonshot AI trillion-parameter open model, April 2026
+  - **DeepSeek R1/V3** — open-source reasoning, MIT licensed, runs on consumer GPUs
 - **Evaluation** — benchmarking what actually works:
   - LM Evaluation Harness (12,540 ★) — 200+ tasks, powers HuggingFace leaderboard
   - SWE-bench (8,566 ★) — real GitHub issue resolution for coding agents
 - **Production Reality** — cost, safety, observability, latency, context limits
-- **Timeline** — from ChatGPT (Nov 2022) to A2A (Apr 2025)
+- **History** — full timeline from GPT-1 (Jun 2018) to Kimi K2.6 (Apr 2026)
 - **Interactive Framework Picker** — answer one question, get a recommendation
 
 ## Stats (May 2026)
@@ -60,8 +68,19 @@ This is a living research project. It breaks down the evolution of AI agents int
 
 | Harness | Stars | Best For |
 |---------|-------|----------|
+| OpenClaw | 371,497 | Personal AI, any device, fastest growing |
 | Hermes Agent | 148,127 | Full PC control, any model, self-improving |
 | OpenManus | 56,233 | Research, custom behavior, RL training |
+
+### Models Tested
+
+| Model | Provider | Best For |
+|-------|----------|----------|
+| Codex | OpenAI | Terminal coding, IDE integration |
+| Claude Code | Anthropic | Complex reasoning, multi-file editing |
+| Gemini CLI | Google | Long context, Google Cloud integration |
+| Kimi K2.6 | Moonshot AI | Agent swarms, self-hosting, coding |
+| DeepSeek R1/V3 | DeepSeek | Local inference, reasoning, cost-saving |
 
 ### Evaluation
 
@@ -76,7 +95,15 @@ This is a living research project. It breaks down the evolution of AI agents int
 
 It has 40+ built-in tools, MCP server support, custom skills, terminal access, file management, web browsing, code execution, cron scheduling, voice memos, and a gateway that bridges Telegram, Discord, Slack, WhatsApp, Signal, and Email. The self-improving skill system means it gets better the longer it runs.
 
+**OpenClaw** is the viral predecessor that Hermes migrated from. 371K stars in weeks — the fastest-growing AI agent project in GitHub history. Personal AI assistant on any device with live Canvas and voice.
+
 You don't need to be a coder. You just need to understand how your system is laid out and what you want done. The agent handles the rest.
+
+## The Black Box Problem
+
+Modern LLMs have hundreds of billions of parameters. We can observe inputs and outputs, but nobody — not the researchers who built them, not the companies shipping them — can fully trace what happens in between. Capabilities like in-context learning and chain-of-thought reasoning *emerge* at scale; they weren't explicitly programmed.
+
+Since we can't understand the internal reasoning, we put filters on the **output**: RLHF trains a reward model that scores outputs as "good" or "bad." System prompts, guardrails, and content policies are all duct-taped controls on a system we don't fundamentally understand. This is the defining engineering challenge of the field.
 
 ## Contributing
 
