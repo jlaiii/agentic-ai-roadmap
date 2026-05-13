@@ -425,7 +425,7 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">Agentic<span>AI</span></div>
-  <div class="sidebar-sub">v2.3 &mdash; May 2026</div>
+  <div class="sidebar-sub">v2.4 &mdash; May 2026</div>
 
   <div class="nav-section">Navigate</div>
   <ul class="nav-links">
@@ -437,10 +437,11 @@
     <li><a href="#harnesses" onclick="setActive(this)"><span class="num">05</span>Harnesses</a></li>
     <li><a href="#blackbox" onclick="setActive(this)"><span class="num">06</span>The Black Box</a></li>
     <li><a href="#agi" onclick="setActive(this)"><span class="num">07</span>AGI</a></li>
-    <li><a href="#models" onclick="setActive(this)"><span class="num">08</span>Models</a></li>
-    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">09</span>Evaluation</a></li>
-    <li><a href="#reality" onclick="setActive(this)"><span class="num">10</span>Production Reality</a></li>
-    <li><a href="#history" onclick="setActive(this)"><span class="num">11</span>History</a></li>
+    <li><a href="#teaching" onclick="setActive(this)"><span class="num">08</span>Teaching</a></li>
+    <li><a href="#models" onclick="setActive(this)"><span class="num">09</span>Models</a></li>
+    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">10</span>Evaluation</a></li>
+    <li><a href="#reality" onclick="setActive(this)"><span class="num">11</span>Production Reality</a></li>
+    <li><a href="#history" onclick="setActive(this)"><span class="num">12</span>History</a></li>
   </ul>
 
   <div class="nav-section">Resources</div>
@@ -1139,11 +1140,71 @@
     </div>
   </section>
 
+  <!-- Agent Teaching &amp; Context Engineering -->
+  <section class="section" id="teaching">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">08</span>
+        <h2>Agent Teaching &amp; Context Engineering</h2>
+      </div>
+      <p class="section-intro reveal">
+        Getting the agent is step one. Making it actually useful means becoming its teacher. The more domain expertise you feed it, the less it hallucinates and the more it operates like a senior engineer who just joined your team.
+      </p>
+
+      <div class="pattern-list">
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">👨‍🏫</div>
+          <div class="pattern-body">
+            <h3>You Are the Teacher Now</h3>
+            <p>An agent without context is like hiring a genius intern who knows nothing about your stack. It can reason, but it doesn't know your conventions, your infrastructure, or your business logic. <strong>You still need to understand the system you're automating.</strong> The agent doesn't replace domain knowledge — it amplifies it. If you can't explain what you want, the agent can't build it.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">📖</div>
+          <div class="pattern-body">
+            <h3>Skills = Books the Agent Reads</h3>
+            <p>When you teach an agent something, tell it to save that knowledge as a <strong>skill</strong> — a structured document it can reference later. That skill becomes a "book" in the agent's library. Next time it encounters a similar problem, it opens that book and follows the guide you wrote. The more skills you build, the more the agent behaves like a seasoned team member who has seen your problems before.</p>
+            <p style="margin-top:8px">Example workflow: walk the agent through deploying your microservice, have it document the steps as a skill, then later say "deploy the auth service" and it pulls that skill automatically. No re-explaining.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🎯</div>
+          <div class="pattern-body">
+            <h3>Specificity Beats Cleverness</h3>
+            <p>Vague instructions produce vague results. <em>"Fix the API"</em> gets you a guess. <em>"The /users endpoint returns 500 when the email field is missing — add validation and return 400 with a JSON error body"</em> gets you a fix you can merge. The agent doesn't have your intuition or your history with the codebase. <strong>Direct, specific, unambiguous instructions win every time.</strong> Treat the agent like a junior dev who is incredibly fast but needs everything spelled out.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🧠</div>
+          <div class="pattern-body">
+            <h3>Context Engineering: The New Prompt Engineering</h3>
+            <p>Anthropic and OpenAI both flagged 2025-2026 as the shift from "prompt engineering" to <strong>context engineering</strong>. It's not about crafting the perfect one-shot prompt anymore. It's about building persistent context: project docs, API schemas, runbooks, error patterns, tribal knowledge. The agent's output quality is directly proportional to the quality of context you feed it. Garbage context = garbage behavior.</p>
+            <p style="margin-top:8px">Best practice: maintain a <code>/context</code> or <code>.agent/</code> directory in every repo with architecture decisions, API contracts, deployment procedures, and common failure modes. Point your agent at it on startup.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🔄</div>
+          <div class="pattern-body">
+            <h3>Walk It Through, Then Let It Walk Alone</h3>
+            <p>The first time you teach the agent a workflow, do it interactively: <em>"Run this command, show me the output, I'll tell you what to do next."</em> After 2-3 iterations, the agent has the pattern. Now you say <em>"Do the full deploy autonomously using the skill we built."</em> This teach-then-release loop is how you go from "the agent helps me" to "the agent handles it while I sleep."</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">⚠️</div>
+          <div class="pattern-body">
+            <h3>What Happens When You Don't Understand the System</h3>
+            <p>If you blindly trust an agent to manage infrastructure you don't understand, you're one hallucinated command away from deleting a production database. The agent will confidently execute what it thinks is right. <strong>Your domain knowledge is the safety rail.</strong> You need to know enough to spot when the agent is wrong, to set guardrails around dangerous operations, and to verify the output. The agent amplifies your expertise — it doesn't replace the need for it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Models -->
   <section class="section" id="models">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">08</span>
+        <span class="section-num">09</span>
         <h2>Models I've Tested</h2>
       </div>
       <p class="section-intro reveal">
@@ -1208,7 +1269,7 @@
   <section class="section" id="evaluation">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">09</span>
+        <span class="section-num">10</span>
         <h2>Evaluation</h2>
       </div>
       <p class="section-intro reveal">
@@ -1272,7 +1333,7 @@
   <section class="section" id="reality">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">10</span>
+        <span class="section-num">11</span>
         <h2>Production Reality</h2>
       </div>
       <p class="section-intro reveal">The blog posts don't talk about this. Here's what actually matters when you ship.</p>
@@ -1322,7 +1383,7 @@
   <section class="section" id="history">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">11</span>
+        <span class="section-num">12</span>
         <h2>History</h2>
       </div>
       <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here — from the first GPT to the models you're using today.</p>
@@ -1488,7 +1549,7 @@
   }
 
   // Scroll spy
-  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'agi', 'models', 'evaluation', 'reality', 'history'];
+  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'agi', 'teaching', 'models', 'evaluation', 'reality', 'history'];
   addEventListener('scroll', () => {
     let current = 'overview';
     for (const id of sections) {
