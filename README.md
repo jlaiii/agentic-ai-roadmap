@@ -38,19 +38,27 @@ This is a living research project. It starts with the transformer engine that po
   - **OpenClaw** (371,497 ★) — fastest-growing agent project, personal AI on any device, live Canvas, voice
   - **OpenManus** (56,233 ★) — MetaGPT team's open agent with RL training pipeline
 - **The Black Box** — why we don't understand how LLMs work, emergent behavior, and how output filtering (RLHF, guardrails) is our duct-tape fix
+- **Security & Adversarial Risks** — OWASP LLM Top 10 + Agentic AI Top 10, prompt injection, jailbreak techniques, sandbox escapes with real CVEs (CVSS 9+), defense tools (Garak, PyRIT, Promptfoo, LLM Guard), real company incidents (Samsung, Chevy, DPD)
 - **AGI: Artificial General Intelligence** — what AGI actually means, why it's not about consciousness, why people conflate the two, and personal observations of emergent agent behavior
+- **Memory & State Architecture** — RAG, vector databases (Pinecone, Weaviate, Chroma, Qdrant, pgvector), episodic/semantic/procedural memory, LangGraph/AutoGen state machines, MemGPT virtual memory, Mem0, persistence strategies
 - **Agent Teaching & Context Engineering** — why you still need to understand the system you're automating, how skills work as "books" the agent reads, why specificity beats cleverness, and the teach-then-release loop
+- **Human-in-the-Loop & Approval Workflows** — staged approvals, confidence thresholds, risk tiers (auto → notify → approve → multi-party), LangGraph interrupt nodes, anti-patterns like approval fatigue
 - **5 Models I've Tested**:
   - **OpenAI Codex** (82,325 ★ repo) — terminal coding agent, April 2025
   - **Claude Code** (181,106 ★ resources) — Anthropic's terminal agent with Kairos memory
   - **Gemini CLI** (103,860 ★) — Google's open-source terminal agent, June 2025
   - **Kimi K2.6** — Moonshot AI trillion-parameter open model, April 2026
   - **DeepSeek R1/V3** — open-source reasoning, MIT licensed, runs on consumer GPUs
+- **Multimodal Agents** — GPT-4V, Claude 3 Vision, Gemini; Browser Use, OSWorld, CogAgent; document understanding (Docling, Marker); vision benchmarks (MMMU, MathVista); cost reality of vision tokens
+- **Fine-Tuning & Domain Adaptation** — LoRA, QLoRA, PEFT methods, synthetic data generation, adapter serving in production, when to fine-tune vs. prompt
 - **Evaluation** — benchmarking what actually works:
   - LM Evaluation Harness (12,540 ★) — 200+ tasks, powers HuggingFace leaderboard
   - SWE-bench (8,566 ★) — real GitHub issue resolution for coding agents
+- **Observability & Debugging** — LangSmith/Langfuse/OpenTelemetry tracing, token burn tracking, evaluation pipelines (Promptfoo, Garak, PyRIT), SRE for agents, time-travel debugging with checkpointing
 - **Production Reality** — cost, safety, observability, latency, context limits
+- **Legal, Compliance & Liability** — EU AI Act (Aug 2026 deadline), GDPR Article 22, risk categories, deployer liability, copyright training data lawsuits, 6-point compliance checklist
 - **History** — full timeline from GPT-1 (Jun 2018) to Kimi K2.6 (Apr 2026)
+- **Community & Resources** — key papers (Attention, ReAct, CoT, MemGPT, Toolformer, SWE-bench, GAIA), people to follow (Karpathy, Mollick, Willison, Swyx, Weng, Ng), newsletters, Discord/Reddit communities, model comparison tools
 - **Interactive Framework Picker** — answer one question, get a recommendation
 
 ## Stats (May 2026)

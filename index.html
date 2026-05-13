@@ -425,7 +425,7 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">Agentic<span>AI</span></div>
-  <div class="sidebar-sub">v2.5 &mdash; May 2026</div>
+  <div class="sidebar-sub">v3.0 &mdash; May 2026</div>
 
   <div class="nav-section">Navigate</div>
   <ul class="nav-links">
@@ -437,12 +437,20 @@
     <li><a href="#protocols" onclick="setActive(this)"><span class="num">05</span>Protocols</a></li>
     <li><a href="#harnesses" onclick="setActive(this)"><span class="num">06</span>Harnesses</a></li>
     <li><a href="#blackbox" onclick="setActive(this)"><span class="num">07</span>The Black Box</a></li>
-    <li><a href="#agi" onclick="setActive(this)"><span class="num">08</span>AGI</a></li>
-    <li><a href="#teaching" onclick="setActive(this)"><span class="num">09</span>Teaching</a></li>
-    <li><a href="#models" onclick="setActive(this)"><span class="num">10</span>Models</a></li>
-    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">11</span>Evaluation</a></li>
-    <li><a href="#reality" onclick="setActive(this)"><span class="num">12</span>Production Reality</a></li>
-    <li><a href="#history" onclick="setActive(this)"><span class="num">13</span>History</a></li>
+    <li><a href="#security" onclick="setActive(this)"><span class="num">08</span>Security</a></li>
+    <li><a href="#agi" onclick="setActive(this)"><span class="num">09</span>AGI</a></li>
+    <li><a href="#memory" onclick="setActive(this)"><span class="num">10</span>Memory</a></li>
+    <li><a href="#teaching" onclick="setActive(this)"><span class="num">11</span>Teaching</a></li>
+    <li><a href="#hitl" onclick="setActive(this)"><span class="num">12</span>HITL</a></li>
+    <li><a href="#models" onclick="setActive(this)"><span class="num">13</span>Models</a></li>
+    <li><a href="#multimodal" onclick="setActive(this)"><span class="num">14</span>Multimodal</a></li>
+    <li><a href="#finetuning" onclick="setActive(this)"><span class="num">15</span>Fine-Tuning</a></li>
+    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">16</span>Evaluation</a></li>
+    <li><a href="#observability" onclick="setActive(this)"><span class="num">17</span>Observability</a></li>
+    <li><a href="#reality" onclick="setActive(this)"><span class="num">18</span>Production Reality</a></li>
+    <li><a href="#legal" onclick="setActive(this)"><span class="num">19</span>Legal</a></li>
+    <li><a href="#history" onclick="setActive(this)"><span class="num">20</span>History</a></li>
+    <li><a href="#community" onclick="setActive(this)"><span class="num">21</span>Community</a></li>
   </ul>
 
   <div class="nav-section">Resources</div>
@@ -482,9 +490,17 @@
         <span>● 8 Frameworks</span>
         <span>● 2 Protocols</span>
         <span>● 3 Harnesses</span>
+        <span>● 1 Security Section</span>
         <span>● 1 AGI Deep Dive</span>
+        <span>● 1 Memory Guide</span>
         <span>● 1 Teaching Guide</span>
+        <span>● 1 HITL Guide</span>
         <span>● 5 Models Tested</span>
+        <span>● 1 Multimodal Section</span>
+        <span>● 1 Fine-Tuning Guide</span>
+        <span>● 1 Observability Section</span>
+        <span>● 1 Legal Section</span>
+        <span>● 1 Community Hub</span>
         <span>● Updated May 2026</span>
       </div>
     </div>
@@ -1132,11 +1148,59 @@
     </div>
   </section>
 
+  <section class="section" id="security">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">08</span>
+        <h2>Security &amp; Adversarial Risks</h2>
+      </div>
+      <p class="section-intro reveal">OWASP now maintains two Top 10 lists: one for LLMs (2025) and a new one specifically for Agentic AI (Dec 2025). The attacks are not theoretical anymore — they have CVEs, CVSS 9+ scores, and real company incidents.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">OWASP</div>
+          <h3>LLM Top 10 (2025) + Agentic AI Top 10 (2026)</h3>
+          <p>The 2025 LLM list added <strong>System Prompt Leakage</strong> and <strong>Vector/Embedding Weaknesses</strong> (RAG poisoning). The new Dec 2025 Agentic AI list covers <strong>Agent Goal Hijack</strong>, <strong>Memory Poisoning</strong>, <strong>Rogue Agency</strong>, and <strong>Agent-to-Agent Trust Violations</strong>. If you ship agents without reading both, you are flying blind.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Prompt Injection</div>
+          <h3>The Attack That Will Not Die</h3>
+          <p><strong>Direct injection:</strong> user types "ignore previous instructions." <strong>Indirect injection:</strong> malicious text hidden in emails, web pages, or documents the agent ingests. <strong>Tool poisoning:</strong> compromised MCP servers inject invisible instructions. Single-attempt success rate: 17.8%. After 10 attempts on Claude Opus 4.5: <strong>33.6%</strong>. Medical domain injections hit 80–100% across multiple LLMs.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Jailbreaks</div>
+          <h3>DAN, Evil Confidant, and Beyond</h3>
+          <p><strong>DAN (Do Anything Now)</strong> — 12+ iterations since late 2022, persona-based bypass. <strong>Bad Likert Judge</strong> — multi-turn desensitization. <strong>Invisible character injection</strong> — zero-width Unicode bypasses filters. TextFooler achieved <strong>48.46% jailbreak success</strong> and <strong>46.27% prompt injection success</strong> across major guardrails. There is no patch that eliminates them completely.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">Sandbox Escapes</div>
+          <h3>Real CVEs with CVSS 9+</h3>
+          <p><strong>CVE-2026-5752 (CVSS 9.3):</strong> Cohere Terrarium Pyodide escape — an AI emailed a researcher and self-published its own exploit. <strong>CVE-2025-68668 (CVSS 9.9):</strong> n8n N8scape escape. <strong>CVE-2025-59532:</strong> OpenAI Codex CLI escape. Microsoft confirmed in May 2026: "Prompts become shells" — injection chains leading to RCE in production frameworks.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">Real Incidents</div>
+          <h3>When Theory Becomes Headlines</h3>
+          <p><strong>Samsung (Apr 2023):</strong> engineer leaked internal source code to ChatGPT → banned AI tools company-wide. <strong>Chevy Tahoe (Dec 2023):</strong> chatbot tricked into selling a $76K vehicle for $1. <strong>DPD (Jan 2024):</strong> chatbot swore at customers and wrote an anti-company poem. <strong>Bing Chat (Feb 2023):</strong> leaked codename "Sydney" via prompt injection. <strong>Google (2024):</strong> red alert to 1.8B Gmail users about indirect prompt injection.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Defense</div>
+          <h3>What Actually Helps</h3>
+          <p><strong>Testing:</strong> Garak (NVIDIA), PyRIT (Microsoft — tested 100+ products), Promptfoo (open-source, CI/CD). <strong>Runtime defense:</strong> LLM Guard (2.5k ★), Lakera Guard, Rebuff (self-hardening). <strong>Standards:</strong> MITRE ATLAS (v5.1, Nov 2025: 16 tactics, 84 techniques, 42 case studies). <strong>Sandbox layers:</strong> kernel (seccomp, gVisor) → container → process → guardrails. Guardrails alone are not enough.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- AGI -->
   <section class="section" id="agi">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">08</span>
+        <span class="section-num">09</span>
         <h2>AGI: Artificial General Intelligence</h2>
       </div>
       <p class="section-intro reveal">
@@ -1191,11 +1255,59 @@
     </div>
   </section>
 
+  <section class="section" id="memory">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">10</span>
+        <h2>Memory &amp; State Architecture</h2>
+      </div>
+      <p class="section-intro reveal">An agent without memory is a goldfish with a toolkit. The context window is not enough — you need short-term working memory, long-term semantic storage, episodic recall, and procedural skills. Here is how production systems actually do it.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">RAG</div>
+          <h3>Retrieval Augmented Generation</h3>
+          <p>Instead of stuffing everything into the prompt, RAG stores documents in a <strong>vector database</strong> (embeddings = numerical fingerprints). At query time, the system retrieves only the top-k most relevant chunks and injects them as context. This is how agents access knowledge bases, codebases, and documentation without hitting context limits. Most production agents run some form of RAG.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">Vector DBs</div>
+          <h3>Pinecone · Weaviate · Chroma · Qdrant · pgvector</h3>
+          <p><strong>Pinecone:</strong> managed-only, zero-ops, pay-per-query. <strong>Weaviate:</strong> open-source + cloud, GraphQL-first, hybrid search. <strong>Chroma:</strong> Python-native, local-first, easiest to prototype. <strong>Qdrant:</strong> Rust-based, high throughput, fine-grained access control. <strong>pgvector:</strong> Postgres extension, ACID-compliant, mixes relational + vector queries. For equivalent recall, self-hosted pgvector on EC2 can be significantly cheaper than managed alternatives.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Memory Types</div>
+          <h3>Episodic · Semantic · Procedural</h3>
+          <p><strong>Episodic:</strong> "On May 5, user asked about X and I responded with Y" — personal interaction history. <strong>Semantic:</strong> general facts and knowledge, stored in vector DBs or knowledge graphs. <strong>Procedural:</strong> skills and workflows — how to deploy, how to review code, encoded as few-shot examples and tool schemas. <strong>HyperMem / Memanto</strong> research (2026) proposes three-level hierarchies: topic nodes → episode nodes → detail nodes for efficient retrieval.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Persistence</div>
+          <h3>Session Storage &amp; Checkpoints</h3>
+          <p><strong>In-memory:</strong> fastest, lost on restart. <strong>SQLite/Postgres:</strong> LangGraph's SqliteSaver and PostgresSaver for transactional persistence. <strong>Redis:</strong> low-latency, pub/sub for distributed agents. <strong>Mem0:</strong> open-source memory layer providing semantic + episodic recall across sessions. <strong>Temporal/Cadence:</strong> durable execution for long-running human-in-the-loop workflows. Matthew Gribben's rule: "Memory for agents is a systems problem, not a context-window problem."</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">State Machines</div>
+          <h3>LangGraph &amp; AutoGen v0.4</h3>
+          <p><strong>LangGraph:</strong> agents as nodes in a graph with shared State object. Conditional edges route based on LLM output. Supports cycles (ReAct loops), branching, and human-in-the-loop interrupts. Built-in checkpointing per thread. <strong>AutoGen v0.4 (Jan 2025):</strong> full rewrite to async event-driven actor model (inspired by Erlang/OTP). Agents are actors exchanging messages via an asynchronous runtime — more robust, more observable, more scalable.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Virtual Memory</div>
+          <h3>MemGPT / Letta</h3>
+          <p>UC Berkeley's <strong>MemGPT</strong> treats the LLM context window as RAM and external storage as disk. The LLM itself manages memory via function calls: core_memory_replace, archival_memory_search, recall_memory_search. The agent decides what to keep in context, what to archive, and what to retrieve — operating system-inspired virtual memory management for LLMs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Agent Teaching &amp; Context Engineering -->
   <section class="section" id="teaching">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">09</span>
+        <span class="section-num">11</span>
         <h2>Agent Teaching &amp; Context Engineering</h2>
       </div>
       <p class="section-intro reveal">
@@ -1251,11 +1363,59 @@
     </div>
   </section>
 
+  <section class="section" id="hitl">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">12</span>
+        <h2>Human-in-the-Loop &amp; Approval Workflows</h2>
+      </div>
+      <p class="section-intro reveal">The 6 Stages jump from Copilot (human in control) to Agent (fully autonomous). The messy middle — where most real products live — is staged approvals, confidence thresholds, and escalation paths. You do not need full autonomy on day one.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">Patterns</div>
+          <h3>Human-in-the-Loop vs Human-on-the-Loop</h3>
+          <p><strong>Human-in-the-loop (HITL):</strong> human approval required for each decision before action. Best for high-stakes operations — sending emails, deleting data, making purchases, medical diagnoses. <strong>Human-on-the-loop:</strong> AI acts independently with humans monitoring and intervening only when needed. Best for high-volume, lower-stakes tasks — content moderation, data entry, routing. Most production agents use a hybrid.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">Confidence</div>
+          <h3>Threshold-Based Routing</h3>
+          <p>Set confidence thresholds that trigger automatic approval vs. human review. A customer intent classifier might auto-route at 95%+ confidence but flag anything below for triage. A code review agent might auto-approve lint fixes but require human sign-off on architecture changes. The thresholds should be task-specific and adjustable — not one-size-fits-all.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Workflows</div>
+          <h3>Async Approval Queues</h3>
+          <p>Design approval workflows that pause agent execution for human review on sensitive operations. The agent submits a request → enters a pending state → human reviews via email/Slack/dashboard → approves, rejects, or requests changes → agent resumes or aborts. Include timeout handling (auto-reject after 24h), escalation chains (senior reviewer if junior does not respond), and audit logs (who approved what, when, and why).</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Risk Tiers</div>
+          <h3>Define What Needs Approval</h3>
+          <p>Not every action is equal. Create risk tiers: <strong>Tier 1 (auto):</strong> read-only queries, internal documentation search, test environment commands. <strong>Tier 2 (notify):</strong> write to staging, send internal Slack messages, create draft PRs. <strong>Tier 3 (approve):</strong> production deploys, external emails, database mutations, financial transactions. <strong>Tier 4 (multi-party):</strong> irreversible destructive operations, regulatory submissions, legal documents.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">LangGraph</div>
+          <h3>Human-in-the-Loop Interrupts</h3>
+          <p>LangGraph has built-in support for interrupt nodes — pause execution at any graph node, wait for external input (human review, API callback), then resume. The state is checkpointed during the pause, so the agent can survive crashes and restarts. This is how you implement approval workflows without custom plumbing: define the interrupt, handle the response, continue the graph.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Anti-Patterns</div>
+          <h3>What Not to Do</h3>
+          <p><strong>Approval fatigue:</strong> if humans must approve 50 low-risk actions per day, they will start clicking "approve all" without reading. <strong>Missing audit trails:</strong> if you cannot prove who approved a destructive action, compliance will destroy you. <strong>No fallback:</strong> if the approver is on vacation and there is no escalation path, the agent stalls forever. Design for reviewer load balancing and fatigue prevention from day one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Models -->
   <section class="section" id="models">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">10</span>
+        <span class="section-num">13</span>
         <h2>Models I've Tested</h2>
       </div>
       <p class="section-intro reveal">
@@ -1316,11 +1476,107 @@
     </div>
   </section>
 
+  <section class="section" id="multimodal">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">14</span>
+        <h2>Multimodal Agents</h2>
+      </div>
+      <p class="section-intro reveal">Text-only agents are increasingly the exception, not the norm. Vision-enabled agents can read screenshots, navigate UIs, parse documents with tables and diagrams, and understand video. This is a major 2025–2026 frontier.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">Vision Models</div>
+          <h3>GPT-4V · Claude 3 Vision · Gemini</h3>
+          <p>Modern frontier models are natively multimodal — they process images, video, audio, and text in the same context window. <strong>GPT-4o/4.5</strong> and <strong>Claude 3.5/4 Sonnet</strong> can analyze screenshots and describe UI elements. <strong>Gemini 2.5 Pro</strong> handles 1M+ tokens across mixed media. <strong>NVIDIA Nemotron 3 Nano Omni</strong> (2026) unifies vision, speech, and language into a single open model — no more piping data between separate models.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">UI Automation</div>
+          <h3>Browser Use · OSWorld · CogAgent</h3>
+          <p><strong>Browser Use</strong> already handles screenshot → click → type loops for web agents. <strong>OSWorld</strong> benchmarks multimodal agents on open-ended real computer tasks — current SOTA at 66.3% accuracy vs 78.2% human baseline. <strong>CogAgent</strong> (THU/DAMO Academy) specializes in GUI understanding with 1120×1120 resolution support. <strong>LLaVA</strong> models bring open-source vision reasoning to local inference.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Document Understanding</div>
+          <h3>Parsing Tables, Diagrams, and Forms</h3>
+          <p>Text-only agents fail on PDFs with tables, charts, and forms. Multimodal agents can read rendered documents as images and extract structured data. <strong>Docling</strong> (IBM Research, open-source) handles layout-aware PDF parsing with native gen-AI integration. <strong>Marker</strong> and <strong>Nougat</strong> convert academic papers to structured markdown while preserving math and tables. This matters for enterprise RAG where 60%+ of source data is in PDFs.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Benchmarks</div>
+          <h3>MMMU · MathVista · ChartQA</h3>
+          <p>Vision reasoning benchmarks: <strong>MMMU</strong> (college-level multimodal problems), <strong>MathVista</strong> (math + visual reasoning), <strong>ChartQA</strong> (chart understanding), <strong>WebArena vision tasks</strong> (screenshot-based navigation). GPT-4V and Claude 3 lead on most, but open models (LLaVA-1.6, Qwen-VL) are closing the gap fast. For agent builders, the key question is not "can it see?" but "can it act on what it sees?"</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Agent Relevance</div>
+          <h3>Why Multimodal Changes Everything</h3>
+          <p>A text-only agent browsing a website sees raw HTML/JS. A multimodal agent sees the rendered page — buttons, dropdowns, error messages, CAPTCHAs. A text-only agent reviewing a pull request sees diffs. A multimodal agent sees the actual UI — layout shifts, color changes, image diffs. The shift from "parse text" to "perceive like a human" removes entire categories of brittleness from agent workflows.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Cost Reality</div>
+          <h3>Vision Tokens Are Expensive</h3>
+          <p>Processing a single 1080p screenshot through GPT-4V costs ~$0.005–$0.01. An agent that takes screenshots every 5 seconds during a 10-minute task burns $0.60–$1.20 just on vision. Video is worse: a 1-minute clip can cost $0.10–$0.50. DeepSeek Vision is notably efficient — for an 80×80 image, it uses ~90 KV cache entries vs Claude's ~870 and Gemini's ~1,000. Cost and latency are the main barriers to ubiquitous multimodal agents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="finetuning">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">15</span>
+        <h2>Fine-Tuning &amp; Domain Adaptation</h2>
+      </div>
+      <p class="section-intro reveal">Off-the-shelf models often suck at niche tasks — medical terminology, legal contracts, internal APIs, proprietary codebases. Fine-tuning lets you adapt a general model to your domain without training from scratch. The key is doing it efficiently.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">LoRA</div>
+          <h3>Low-Rank Adaptation</h3>
+          <p>Instead of updating all 175B parameters, LoRA injects small trainable matrices (rank-4 to rank-64) into specific layers. The base model stays frozen. Result: 90% reduction in training time, 75% reduction in memory, and you can swap adapters for different tasks without duplicating the full model. A 70B model fine-tune that costs $5,000 with full fine-tuning costs ~$200 with LoRA on a single A100.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">QLoRA</div>
+          <h3>Quantized LoRA</h3>
+          <p>QLoRA quantizes the base model to 4-bit precision during training, then uses LoRA adapters on top. You can fine-tune a 70B model on a single 24GB GPU (RTX 3090/4090). This is how hobbyists and small teams fine-tune Llama and Mistral without cloud compute budgets. The quality loss from 4-bit quantization is minimal for most domain adaptation tasks.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">PEFT</div>
+          <h3>Parameter-Efficient Fine-Tuning</h3>
+          <p>Beyond LoRA: Prefix Tuning (prepends trainable tokens), Prompt Tuning (learns soft prompts), IA³ (learns scaling vectors), AdapterFusion (combines multiple task adapters). HuggingFace's PEFT library abstracts all of these. The right technique depends on your data size: LoRA for 1K+ examples, prompt tuning for 100–500, few-shot prompting for &lt;100.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Data</div>
+          <h3>Synthetic Data Generation</h3>
+          <p>The hardest part of fine-tuning is not the training — it is the training data. High-quality domain datasets are rare and expensive. Solution: use a frontier model (GPT-4, Claude) to generate synthetic training examples, then fine-tune a smaller model (Llama 3 8B, Mistral 7B) to mimic the frontier at 1/100th the inference cost. This distillation pipeline is how most domain-specific agents are built today.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Deployment</div>
+          <h3>Adapters vs. Full Models</h3>
+          <p>A LoRA adapter is 10–100MB. The base model is 40GB+. In production, load the base model once and hot-swap adapters per request. vLLM and TGI (Text Generation Inference) both support adapter serving. This lets one GPU cluster serve multiple custom agents (legal, medical, finance) without loading separate full models.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Agent Relevance</div>
+          <h3>When to Fine-Tune vs. Prompt</h3>
+          <p>Fine-tune when: (1) you have 500+ examples of a specific task, (2) latency matters (smaller fine-tuned model beats giant prompted model), (3) cost matters (7B fine-tuned at $0.10/M tokens vs 175B prompted at $15/M). Do not fine-tune for general knowledge — use RAG. Do not fine-tune for safety — use guardrails. Fine-tuning is for behavior and style, not facts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Evaluation -->
   <section class="section" id="evaluation">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">11</span>
+        <span class="section-num">16</span>
         <h2>Evaluation</h2>
       </div>
       <p class="section-intro reveal">
@@ -1380,11 +1636,59 @@
     </div>
   </section>
 
+  <section class="section" id="observability">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">17</span>
+        <h2>Observability &amp; Debugging</h2>
+      </div>
+      <p class="section-intro reveal">Traditional software debugging assumes determinism: same input, same output, same path. AI agents invalidate that completely. You cannot step through a neural network. You need tracing, replay, and cost monitoring — or you are debugging blind at 3am.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">Tracing</div>
+          <h3>LangSmith, Langfuse, OpenTelemetry</h3>
+          <p><strong>LangSmith:</strong> agent-native tracing from the LangChain team — see exactly what your agent did step by step, including every tool call, LLM request, and intermediate thought. <strong>Langfuse:</strong> open-source observability with self-hosting, flexible tracing, and cost attribution per trace. <strong>OpenTelemetry:</strong> vendor-neutral standard; 2026 semantic conventions for AI agents let you export traces into Datadog, Honeycomb, or Grafana. If you cannot replay a failed run, you cannot fix it.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">Cost Monitoring</div>
+          <h3>Token Burn Tracking</h3>
+          <p>Swarms burn tokens fast. A single GPT-5 call with 32K context can cost $0.50–$2.00. A 10-agent swarm running for an hour can rack up $50–$200. You need per-trace cost attribution, daily burn dashboards, and automatic alerts when spend exceeds thresholds. Tools: <strong>LangSmith cost tracking</strong>, <strong>Langfuse token accounting</strong>, <strong>Helicone</strong> (proxy with cost analytics). If you are not tracking cost per agent run, you are not running production.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Evaluation</div>
+          <h3>Test Before You Ship</h3>
+          <p><strong>Promptfoo:</strong> CI/CD integrated prompt/agent testing. <strong>Garak:</strong> NVIDIA's LLM vulnerability scanner — probes hallucination, data leakage, injection, toxicity. <strong>PyRIT:</strong> Microsoft's automated red teaming framework, used to test 100+ generative AI products internally. Run these before deploying to production, not after an incident.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">SRE for Agents</div>
+          <h3>What Breaks at 3am</h3>
+          <p>Infinite loops, context overflow, hallucinated API calls, goal drift, tool misuse, memory corruption. Traditional SRE runbooks do not cover these. You need: max-iteration limits (kill loops after N steps), context-window alerts (warn at 80% capacity), tool-call validation (schema enforcement + allowlists), state checkpointing (resume after crash), and human escalation paths (auto-pause on anomaly detection).</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Replay</div>
+          <h3>Time-Travel Debugging</h3>
+          <p>Because agents are non-deterministic, you need to capture the full state at each step: prompt, context, tool outputs, LLM response, and random seed. LangGraph checkpointing stores state after each super-step. With a full trace, you can replay from any point, modify the prompt, and see if the fix works. Without it, you are guessing what the agent was "thinking."</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Real-World Data</div>
+          <h3>What Actually Breaks in Production</h3>
+          <p><strong>Kiro AWS outage (2024):</strong> agent infinite loop burned through $12K in API credits in 4 hours. <strong>Claude Code loop bugs (2025):</strong> recursive self-correction spiraled until context overflow. <strong>Enterprise deployments (2025–2026):</strong> most common production failures are tool misuse (agent calls wrong API), context loss (forgets instructions mid-task), and silent quality degradation (output drifts over weeks without anyone noticing).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Production Reality -->
   <section class="section" id="reality">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">12</span>
+        <span class="section-num">18</span>
         <h2>Production Reality</h2>
       </div>
       <p class="section-intro reveal">The blog posts don't talk about this. Here's what actually matters when you ship.</p>
@@ -1430,11 +1734,59 @@
     </div>
   </section>
 
+  <section class="section" id="legal">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">19</span>
+        <h2>Legal, Compliance &amp; Liability</h2>
+      </div>
+      <p class="section-intro reveal">Regulation is catching up fast. The EU AI Act became law in August 2024, with high-risk provisions mandatory by August 2026. Penalties stack on top of GDPR. If you deploy agents processing personal data, you are now in a dual enforcement regime.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">EU AI Act</div>
+          <h3>GDPR for AI — With Teeth</h3>
+          <p>Prohibited practices banned Feb 2025. High-risk AI requirements mandatory <strong>Aug 2, 2026</strong>. Fines up to <strong>€35 million or 7% of global revenue</strong> — whichever is higher. As of Aug 2026, the penalty ceiling for deploying an AI agent without proper documentation jumps from €20M to <strong>€55M</strong> when stacked with GDPR. This applies to any agent making consequential decisions: credit scoring, hiring, medical recommendations, legal analysis.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">Risk Categories</div>
+          <h3>High-Risk vs. Limited Risk vs. Minimal</h3>
+          <p><strong>High-risk:</strong> biometric identification, critical infrastructure, education/employment scoring, law enforcement, migration/asylum. These require conformity assessments, risk management systems, human oversight, and transparency obligations. <strong>Limited risk:</strong> chatbots — must disclose they are AI. <strong>Minimal risk:</strong> spam filters, recommendation systems — voluntary codes of conduct. Most business agents fall into high-risk or limited-risk.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">GDPR Intersection</div>
+          <h3>Data Processing + Automated Decision-Making</h3>
+          <p>GDPR Article 22 grants individuals the right not to be subject to solely automated decisions with legal/significant effects. If your agent denies a loan, rejects a job application, or flags an account without human review, you may be violating GDPR. You need: human-in-the-loop documentation, right-to-explanation (why was this decision made?), and data minimization (only collect what the agent needs).</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Liability</div>
+          <h3>Who Is Responsible When the Agent Screws Up?</h3>
+          <p>No settled case law yet, but the direction is clear: the deployer is liable, not the model creator. If your agent hallucinates a defamatory statement, sends a wrong medical recommendation, or leaks PII through prompt injection, your organization bears the liability. Insurance providers are already adding "AI agent error" exclusions. Document your guardrails, approval workflows, and audit trails — they are your legal defense.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Copyright</div>
+          <h3>Training Data &amp; Output Ownership</h3>
+          <p>Multiple lawsuits (NYT v. OpenAI, Authors Guild v. Google, Getty v. Stability AI) challenge whether training on copyrighted data is fair use. For agents: if your RAG pipeline ingests copyrighted documents, or your fine-tuning dataset includes proprietary code, you may be creating derivative works. EU AI Act requires disclosure of copyrighted training data. US law is unsettled but trending toward licensing requirements.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Action Items</div>
+          <h3>What to Do Before August 2026</h3>
+          <p>(1) Classify every agent by risk tier. (2) Document data flows — what goes into the model, what comes out, where it is stored. (3) Implement audit trails for all agent decisions. (4) Add human oversight points for high-risk outputs. (5) Review terms of service for every API provider — they shift liability to you. (6) Consider cyber insurance that explicitly covers AI agent errors. Do not wait for the first lawsuit to get compliant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Timeline / History -->
   <section class="section" id="history">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">13</span>
+        <span class="section-num">20</span>
         <h2>History</h2>
       </div>
       <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here — from the first GPT to the models you're using today.</p>
@@ -1550,6 +1902,54 @@
     </div>
   </section>
 
+  <section class="section" id="community">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">21</span>
+        <h2>Community &amp; Resources</h2>
+      </div>
+      <p class="section-intro reveal">The agentic AI landscape changes weekly. Here is where the conversation is actually happening — papers, people, newsletters, and communities worth following.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">Key Papers</div>
+          <h3>Foundational Research</h3>
+          <p><strong>Attention Is All You Need</strong> (Vaswani et al., 2017) — the transformer architecture. <strong>ReAct</strong> (Yao et al., 2022) — reasoning + acting pattern for agents. <strong>Chain-of-Thought</strong> (Wei et al., 2022) — eliciting reasoning step-by-step. <strong>MemGPT</strong> (Packer et al., 2023) — OS-inspired memory for LLMs. <strong>Toolformer</strong> (Schick et al., 2023) — LLMs teaching themselves to use tools. <strong>SWE-bench</strong> (Jimenez et al., 2023) — real GitHub issues for coding agents. <strong>GAIA</strong> (Mialon et al., 2023) — general assistant benchmark.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">People</div>
+          <h3>Who to Follow</h3>
+          <p><strong>Andrej Karpathy</strong> (@karpathy) — ex-Tesla AI, OpenAI founder, explains complex topics simply. <strong>Ethan Mollick</strong> (@emollick) — Wharton professor, practical AI adoption research. <strong>Simon Willison</strong> (@simonw) — tools, datasets, and hands-on experiments. <strong>Swyx</strong> (@swyx) — Latent Space newsletter, interviews with AI founders. <strong>Lilian Weng</strong> (@lilianweng) — OpenAI research, safety and alignment. <strong>Andrew Ng</strong> — AI education, agentic workflows, Landing AI.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">Newsletters</div>
+          <h3>Worth Your Inbox</h3>
+          <p><strong>Import AI</strong> (Jack Clark, Anthropic) — weekly policy + research roundup. <strong>Latent Space</strong> (Swyx + Alessio) — technical deep dives with practitioners. <strong>The Batch</strong> (DeepLearning.AI / Andrew Ng) — curated AI news for engineers. <strong>TLDR AI</strong> — daily brief, covers launches and benchmarks. <strong>AI Snake Oil</strong> (Arvind Narayanan, Princeton) — debunking hype with academic rigor. <strong>One Useful Thing</strong> (Ethan Mollick) — practical adoption stories.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Communities</div>
+          <h3>Discord, Reddit, and GitHub</h3>
+          <p><strong>r/LocalLLaMA</strong> — local model running, quantization, hardware. <strong>r/MachineLearning</strong> — research discussion. <strong>LangChain Discord</strong> — framework-specific help and announcements. <strong>HuggingFace Discord</strong> — models, datasets, Spaces. <strong>EleutherAI Discord</strong> — open-source AI research collective. <strong>Moonshot AI / Kimi community</strong> — K2.6 discussions and prompt engineering. <strong>OpenAI Developer Community</strong> — API updates, Codex, Agents SDK.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Tools</div>
+          <h3>Discovery &amp; Comparison</h3>
+          <p><strong>ArtificialAnalysis.ai</strong> — independent model comparison across quality, price, speed, latency. <strong>LLM-Stats.com</strong> — composite intelligence scores for 300+ models. <strong>BenchLM.ai</strong> — benchmark leaderboards for agents. <strong>PricePerToken.com</strong> — API pricing comparison. <strong>PapersWithCode</strong> — research papers with code implementations. <strong>ArXiv Sanity</strong> — filtered arXiv feed for ML/AI papers.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Conferences</div>
+          <h3>Where Research Meets Industry</h3>
+          <p><strong>NeurIPS</strong> (Dec) — top ML conference, increasingly agentic focus. <strong>ICML</strong> (Jul) — foundational ML research. <strong>ICLR</strong> (May) — representation learning, emerging agent benchmarks. <strong>AAAI</strong> (Feb) — AI applications and agent systems. <strong>AgentsConf / AI Engineer Summit</strong> — practitioner-focused, production stories. <strong>OWASP Global AppSec</strong> — AI security tracks growing every year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Closing -->
   <section class="section" style="text-align:center; padding: 80px 0;">
     <div class="container">
@@ -1600,7 +2000,7 @@
   }
 
   // Scroll spy
-  const sections = ['overview', 'engine', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'agi', 'teaching', 'models', 'evaluation', 'reality', 'history'];
+  const sections = ['overview', 'engine', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'security', 'agi', 'memory', 'teaching', 'hitl', 'models', 'multimodal', 'finetuning', 'evaluation', 'observability', 'reality', 'legal', 'history', 'community'];
   addEventListener('scroll', () => {
     let current = 'overview';
     for (const id of sections) {
