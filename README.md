@@ -19,13 +19,36 @@ This is a living research project. It breaks down the evolution of AI agents int
 
 ## Topics Covered
 
-- Multi-agent orchestration patterns (Supervisor, Debate/Critic, Swarm)
-- Frameworks: CrewAI, LangGraph, AutoGen, OpenAI Agents SDK, Google ADK
-- MCP (Model Context Protocol) — the USB-C for AI tools
-- Browser Use — letting agents control the web
-- Getting started guides for non-technical people
-- Deep-dive architecture details for engineers
+- **6 Stages** of agentic maturity with engineer and beginner paths
+- **3 Orchestration Patterns**: Supervisor, Debate/Critic, Swarm
+- **8 Frameworks** with live GitHub stats:
+  - n8n (187,690 ★) — low-code automation
+  - Dify (141,231 ★) — production platform
+  - LangChain (136,637 ★) — foundational platform
+  - Browser Use (93,725 ★) — web automation for agents
+  - CrewAI (51,322 ★) — role-based teams
+  - AutoGen (57,999 ★) — Microsoft multi-agent framework
+  - LangGraph (31,955 ★) — graph-based workflows
+  - OpenAI Agents SDK (26,272 ★) — minimal primitives
+- **MCP** (Model Context Protocol) — the "USB-C for AI tools"
+- **A2A** (Agent-to-Agent Protocol) — Google's standard for agent interoperability
+- **Production Reality** — cost, safety, observability, latency, context limits
+- **Timeline** — from ChatGPT (Nov 2022) to A2A (Apr 2025)
+- **Interactive Framework Picker** — answer one question, get a recommendation
+
+## Stats (May 2026)
+
+| Framework | Stars | Best For |
+|-----------|-------|----------|
+| n8n | 187,690 | Business automation, visual workflows |
+| Dify | 141,231 | Production apps, teams |
+| LangChain | 136,637 | Custom architectures, deep control |
+| Browser Use | 93,725 | Web automation, scraping |
+| AutoGen | 57,999 | Conversational agents, debates |
+| CrewAI | 51,322 | Quick prototypes, role-based crews |
+| LangGraph | 31,955 | Stateful flows, cyclic logic |
+| OpenAI Agents SDK | 26,272 | Learning internals, OpenAI shops |
 
 ## Contributing
 
-This is just the beginning. Research notes, data, and new findings will be added here as the field evolves.
+This is just the beginning. Research notes, data, and new findings will be added here as the field evolves. Open an issue or PR with new frameworks, updated stats, or corrections.
