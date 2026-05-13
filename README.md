@@ -41,6 +41,7 @@ This is a living research project. It starts with the transformer engine that po
 - **Security & Adversarial Risks** — OWASP LLM Top 10 + Agentic AI Top 10, prompt injection, jailbreak techniques, sandbox escapes with real CVEs (CVSS 9+), defense tools (Garak, PyRIT, Promptfoo, LLM Guard), real company incidents (Samsung, Chevy, DPD)
 - **AGI: Artificial General Intelligence** — what AGI actually means, why it's not about consciousness, why people conflate the two, and personal observations of emergent agent behavior
 - **Memory & State Architecture** — RAG, vector databases (Pinecone, Weaviate, Chroma, Qdrant, pgvector), episodic/semantic/procedural memory, LangGraph/AutoGen state machines, MemGPT virtual memory, Mem0, persistence strategies
+- **World Models & Physical AI** — JEPA architecture (LeCun's $1.03B bet), NVIDIA Cosmos world foundation models, Gemini Robotics, Physical Intelligence π0, sim-to-real gap, why LLMs alone can't simulate physics, embodied AI
 - **Agent Teaching & Context Engineering** — why you still need to understand the system you're automating, how skills work as "books" the agent reads, why specificity beats cleverness, and the teach-then-release loop
 - **Human-in-the-Loop & Approval Workflows** — staged approvals, confidence thresholds, risk tiers (auto → notify → approve → multi-party), LangGraph interrupt nodes, anti-patterns like approval fatigue
 - **5 Models I've Tested**:

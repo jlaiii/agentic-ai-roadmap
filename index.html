@@ -440,17 +440,18 @@
     <li><a href="#security" onclick="setActive(this)"><span class="num">08</span>Security</a></li>
     <li><a href="#agi" onclick="setActive(this)"><span class="num">09</span>AGI</a></li>
     <li><a href="#memory" onclick="setActive(this)"><span class="num">10</span>Memory</a></li>
-    <li><a href="#teaching" onclick="setActive(this)"><span class="num">11</span>Teaching</a></li>
-    <li><a href="#hitl" onclick="setActive(this)"><span class="num">12</span>HITL</a></li>
-    <li><a href="#models" onclick="setActive(this)"><span class="num">13</span>Models</a></li>
-    <li><a href="#multimodal" onclick="setActive(this)"><span class="num">14</span>Multimodal</a></li>
-    <li><a href="#finetuning" onclick="setActive(this)"><span class="num">15</span>Fine-Tuning</a></li>
-    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">16</span>Evaluation</a></li>
-    <li><a href="#observability" onclick="setActive(this)"><span class="num">17</span>Observability</a></li>
-    <li><a href="#reality" onclick="setActive(this)"><span class="num">18</span>Production Reality</a></li>
-    <li><a href="#legal" onclick="setActive(this)"><span class="num">19</span>Legal</a></li>
-    <li><a href="#history" onclick="setActive(this)"><span class="num">20</span>History</a></li>
-    <li><a href="#community" onclick="setActive(this)"><span class="num">21</span>Community</a></li>
+    <li><a href="#worldmodels" onclick="setActive(this)"><span class="num">11</span>World Models</a></li>
+    <li><a href="#teaching" onclick="setActive(this)"><span class="num">12</span>Teaching</a></li>
+    <li><a href="#hitl" onclick="setActive(this)"><span class="num">13</span>HITL</a></li>
+    <li><a href="#models" onclick="setActive(this)"><span class="num">14</span>Models</a></li>
+    <li><a href="#multimodal" onclick="setActive(this)"><span class="num">15</span>Multimodal</a></li>
+    <li><a href="#finetuning" onclick="setActive(this)"><span class="num">16</span>Fine-Tuning</a></li>
+    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">17</span>Evaluation</a></li>
+    <li><a href="#observability" onclick="setActive(this)"><span class="num">18</span>Observability</a></li>
+    <li><a href="#reality" onclick="setActive(this)"><span class="num">19</span>Production Reality</a></li>
+    <li><a href="#legal" onclick="setActive(this)"><span class="num">20</span>Legal</a></li>
+    <li><a href="#history" onclick="setActive(this)"><span class="num">21</span>History</a></li>
+    <li><a href="#community" onclick="setActive(this)"><span class="num">22</span>Community</a></li>
   </ul>
 
   <div class="nav-section">Resources</div>
@@ -1303,11 +1304,60 @@
     </div>
   </section>
 
+  <section class="section" id="worldmodels">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">11</span>
+        <h2>World Models &amp; Physical AI</h2>
+      </div>
+      <p class="section-intro reveal"><strong>LLMs can talk about the world. World models can simulate it.</strong> This is the single biggest architectural disagreement in AI. LeCun called LLMs a "dead end" and raised $1B to prove it. The bet: true intelligence requires understanding physics, not just predicting tokens.</p>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--blue-light);color:var(--blue);">The Debate</div>
+          <h3>Token Prediction Is Not Understanding</h3>
+          <p><strong>Yann LeCun (Dec 2025):</strong> LLMs will be "useless within five years." His argument: autoregressive models learn statistical correlations between tokens, not causal relationships in the physical world. A cat falling off a table is not "predict the next word" — it is physics, gravity, object permanence, and cause-and-effect. Current LLMs can <em>describe</em> what happens but cannot <em>simulate</em> it. <strong>Physical Intelligence</strong> (Karol Hausman) and <strong>AMI Labs</strong> (LeCun's Paris startup, $1.03B raised) are betting everything on world models that internalize physical reality.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--green-light);color:var(--green);">JEPA</div>
+          <h3>Joint Embedding Predictive Architecture</h3>
+          <p>LeCun's alternative to next-token prediction. Instead of predicting pixels or words, <strong>JEPA</strong> learns an internal representation of the world and predicts how that representation will evolve. <strong>V-JEPA 2</strong> (Meta FAIR, 2025) masks regions of video and predicts the latent representation — not the pixels. It is purely self-supervised, needs no labels, and learns intuitive physics. <strong>H-JEPA</strong> extends this to hierarchical temporal abstraction: high-level predictors for long timescales, low-level for immediate physics. Models with 15M parameters trained on a single GPU in hours.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--purple-light);color:var(--purple);">NVIDIA Cosmos</div>
+          <h3>World Foundation Models for Physical AI</h3>
+          <p>Cosmos-Predict2.5 (Oct 2025) is a <strong>flow-based world foundation model</strong> unifying Text2World, Image2World, and Video2World. It generates realistic physics simulations for robotics training without real-world data collection. <strong>Cosmos-Reason1</strong> provides physical reasoning to control the simulation. Major robotics and automotive companies are already training agents entirely in synthetic worlds. It is not just video generation — it is a physics engine trained on real-world dynamics.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--red-light);color:var(--red);">Embodied AI</div>
+          <h3>Robotics That Actually Understands</h3>
+          <p><strong>Google Gemini Robotics</strong> (2025): a vision-language-action model built on Gemini 2.0 that understands new situations it has never been trained on. <strong>Gemini Robotics-ER</strong> adds embodied reasoning — not just what to do, but why and how. <strong>Physical Intelligence π0</strong> ($1B raised at $11B valuation, 2026): a general-purpose robotic foundation model trained to perform any task on any robot. <strong>Tesla Optimus</strong> and <strong>Unitree Go2</strong> are consumer robots powered by embodied world models. The gap between simulation and reality is the new frontier.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:var(--accent-light);color:var(--accent);">Sim-to-Real</div>
+          <h3>The Simulation-to-Reality Gap</h3>
+          <p>The hardest problem in physical AI. Models trained in perfect simulators fail when lighting changes, objects deform, or friction varies. Google's <strong>Step</strong> world model (Aug 2025) uses domain randomization and physics regularization to bridge the gap. <strong>Domain adaptation</strong> techniques: progressive sim complexity, real-world fine-tuning, sensor augmentation, and adversarial training to make the model robust to sim/real mismatches. Without solving this, world models are video game engines, not physical intelligence.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-badge" style="background:#e8f0f8;color:#1e3a5f;">Agent Relevance</div>
+          <h3>What This Means for Text Agents</h3>
+          <p><strong>Short term:</strong> world models will not replace LLMs for code, writing, or reasoning. Text agents will stay dominant for years. <strong>Medium term:</strong> agents will combine both — LLM for planning and language, world model for simulation and physical reasoning. A warehouse robot agent will simulate "if I move this pallet, will the top one fall?" before acting. <strong>Long term:</strong> if LeCun is right, the converged architecture will be a world model with an LLM interface, not an LLM with a body attached. The current "agent = LLM + tools" paradigm may be a local optimum, not the global one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- Agent Teaching &amp; Context Engineering -->
   <section class="section" id="teaching">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">11</span>
+        <span class="section-num">12</span>
         <h2>Agent Teaching &amp; Context Engineering</h2>
       </div>
       <p class="section-intro reveal">
@@ -1366,7 +1416,7 @@
   <section class="section" id="hitl">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">12</span>
+        <span class="section-num">13</span>
         <h2>Human-in-the-Loop &amp; Approval Workflows</h2>
       </div>
       <p class="section-intro reveal">The 6 Stages jump from Copilot (human in control) to Agent (fully autonomous). The messy middle — where most real products live — is staged approvals, confidence thresholds, and escalation paths. You do not need full autonomy on day one.</p>
@@ -1415,7 +1465,7 @@
   <section class="section" id="models">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">13</span>
+        <span class="section-num">14</span>
         <h2>Models I've Tested</h2>
       </div>
       <p class="section-intro reveal">
@@ -1479,7 +1529,7 @@
   <section class="section" id="multimodal">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">14</span>
+        <span class="section-num">15</span>
         <h2>Multimodal Agents</h2>
       </div>
       <p class="section-intro reveal">Text-only agents are increasingly the exception, not the norm. Vision-enabled agents can read screenshots, navigate UIs, parse documents with tables and diagrams, and understand video. This is a major 2025–2026 frontier.</p>
@@ -1527,7 +1577,7 @@
   <section class="section" id="finetuning">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">15</span>
+        <span class="section-num">16</span>
         <h2>Fine-Tuning &amp; Domain Adaptation</h2>
       </div>
       <p class="section-intro reveal">Off-the-shelf models often suck at niche tasks — medical terminology, legal contracts, internal APIs, proprietary codebases. Fine-tuning lets you adapt a general model to your domain without training from scratch. The key is doing it efficiently.</p>
@@ -1576,7 +1626,7 @@
   <section class="section" id="evaluation">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">16</span>
+        <span class="section-num">17</span>
         <h2>Evaluation</h2>
       </div>
       <p class="section-intro reveal">
@@ -1639,7 +1689,7 @@
   <section class="section" id="observability">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">17</span>
+        <span class="section-num">18</span>
         <h2>Observability &amp; Debugging</h2>
       </div>
       <p class="section-intro reveal">Traditional software debugging assumes determinism: same input, same output, same path. AI agents invalidate that completely. You cannot step through a neural network. You need tracing, replay, and cost monitoring — or you are debugging blind at 3am.</p>
@@ -1688,7 +1738,7 @@
   <section class="section" id="reality">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">18</span>
+        <span class="section-num">19</span>
         <h2>Production Reality</h2>
       </div>
       <p class="section-intro reveal">The blog posts don't talk about this. Here's what actually matters when you ship.</p>
@@ -1737,7 +1787,7 @@
   <section class="section" id="legal">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">19</span>
+        <span class="section-num">20</span>
         <h2>Legal, Compliance &amp; Liability</h2>
       </div>
       <p class="section-intro reveal">Regulation is catching up fast. The EU AI Act became law in August 2024, with high-risk provisions mandatory by August 2026. Penalties stack on top of GDPR. If you deploy agents processing personal data, you are now in a dual enforcement regime.</p>
@@ -1786,7 +1836,7 @@
   <section class="section" id="history">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">20</span>
+        <span class="section-num">21</span>
         <h2>History</h2>
       </div>
       <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here — from the first GPT to the models you're using today.</p>
@@ -1905,7 +1955,7 @@
   <section class="section" id="community">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">21</span>
+        <span class="section-num">22</span>
         <h2>Community &amp; Resources</h2>
       </div>
       <p class="section-intro reveal">The agentic AI landscape changes weekly. Here is where the conversation is actually happening — papers, people, newsletters, and communities worth following.</p>
@@ -2000,7 +2050,7 @@
   }
 
   // Scroll spy
-  const sections = ['overview', 'engine', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'security', 'agi', 'memory', 'teaching', 'hitl', 'models', 'multimodal', 'finetuning', 'evaluation', 'observability', 'reality', 'legal', 'history', 'community'];
+  const sections = ['overview', 'engine', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'blackbox', 'security', 'agi', 'memory', 'worldmodels', 'teaching', 'hitl', 'models', 'multimodal', 'finetuning', 'evaluation', 'observability', 'reality', 'legal', 'history', 'community'];
   addEventListener('scroll', () => {
     let current = 'overview';
     for (const id of sections) {
