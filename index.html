@@ -6,252 +6,416 @@
   <title>Agentic AI Roadmap — From Chatbots to Autonomous Workers</title>
   <meta name="description" content="A human-friendly research guide to building and deploying agentic AI systems — from simple chatbots to autonomous AI workers.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #050608; --bg-2: #0c0e12; --bg-3: #13161c; --bg-4: #1a1d26;
-      --text: #f0f2f5; --text-2: #8b92a8; --text-3: #5a6070;
-      --accent: #6366f1; --accent-2: #818cf8; --accent-glow: rgba(99,102,241,.3);
-      --pink: #ec4899; --cyan: #06b6d4; --green: #22c55e; --orange: #f59e0b;
-      --border: #1e2230; --border-hover: #2e3348;
+      --paper: #faf9f6;
+      --paper-2: #f3f1ec;
+      --paper-3: #e8e5de;
+      --ink: #1a1a1a;
+      --ink-2: #4a4a4a;
+      --ink-3: #8a8680;
+      --accent: #c25e00;
+      --accent-2: #e07b1f;
+      --accent-light: #fef3e8;
+      --blue: #1e3a5f;
+      --blue-light: #e8f0f8;
+      --green: #2d6a4f;
+      --green-light: #e8f5ec;
+      --purple: #5b4a9c;
+      --purple-light: #f0ebf8;
+      --border: #d5d0c8;
+      --border-2: #c4beb4;
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family:'Inter',sans-serif; background:var(--bg); color:var(--text);
-      -webkit-font-smoothing:antialiased; overflow-x:hidden; line-height:1.6;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    ::selection { background:var(--accent); color:#fff; }
+    ::selection { background: var(--accent); color: #fff; }
 
-    /* ── Cursor ── */
-    .cursor { position:fixed; top:0; left:0; pointer-events:none; z-index:99999; mix-blend-mode:difference; }
-    .cursor-dot { width:8px; height:8px; background:#fff; border-radius:50%; transform:translate(-50%,-50%); }
-    .cursor-ring { width:40px; height:40px; border:1.5px solid var(--accent-2); border-radius:50%; transform:translate(-50%,-50%); transition:all .12s ease-out; }
-    .cursor.hover .cursor-ring { width:64px; height:64px; border-color:var(--pink); background:rgba(236,72,153,0.08); }
-    @media (pointer:coarse) { .cursor { display:none; } body { cursor:auto; } }
+    /* ── Grid overlay ── */
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.35;
+    }
 
-    /* ── Noise ── */
-    .noise { position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.03;
-      background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    /* ── Sidebar ── */
+    .sidebar {
+      position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+      background: var(--paper-2); border-right: 1px solid var(--border);
+      padding: 32px 24px; z-index: 200; overflow-y: auto;
+      display: flex; flex-direction: column;
+    }
+    .sidebar-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;
+      color: var(--ink); line-height: 1.2; margin-bottom: 8px;
+    }
+    .sidebar-logo span { color: var(--accent); font-style: italic; }
+    .sidebar-sub {
+      font-size: 0.78rem; color: var(--ink-3); margin-bottom: 40px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .nav-section {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--ink-3); font-weight: 600; margin-bottom: 12px; margin-top: 24px;
+    }
+    .nav-links { list-style: none; }
+    .nav-links li { margin-bottom: 2px; }
+    .nav-links a {
+      display: block; padding: 8px 12px; border-radius: 8px;
+      color: var(--ink-2); text-decoration: none; font-size: 0.88rem;
+      font-weight: 500; transition: all 0.2s;
+    }
+    .nav-links a:hover { background: var(--paper-3); color: var(--ink); }
+    .nav-links a.active { background: var(--accent); color: #fff; }
+    .nav-links a .num {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      opacity: 0.6; margin-right: 8px;
+    }
+    .sidebar-footer {
+      margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border);
+      font-size: 0.75rem; color: var(--ink-3); line-height: 1.5;
+    }
+    .sidebar-footer a { color: var(--accent); text-decoration: none; }
 
-    /* ── Ambient blobs ── */
-    .blob { position:fixed; border-radius:50%; filter:blur(100px); pointer-events:none; z-index:0; opacity:.12; animation:blobFloat 14s ease-in-out infinite; }
-    @keyframes blobFloat { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-50px) scale(1.15)} 66%{transform:translate(-30px,40px) scale(.9)} }
+    /* ── Main ── */
+    .main {
+      margin-left: 260px; min-height: 100vh; position: relative; z-index: 1;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 48px; }
 
-    /* ── Scroll entrance ── */
-    .fade-up { opacity:0; transform:translateY(30px); transition:all .8s cubic-bezier(.16,1,.3,1); }
-    .fade-up.visible { opacity:1; transform:translateY(0); }
-    .section-title { opacity:0; transform:translateX(-20px); transition:all .7s cubic-bezier(.16,1,.3,1); }
-    .section-title.visible { opacity:1; transform:translateX(0); }
+    /* ── Mobile header ── */
+    .mobile-header {
+      display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      background: var(--paper); border-bottom: 1px solid var(--border);
+      padding: 12px 20px; align-items: center; justify-content: space-between;
+    }
+    .mobile-header .logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; }
+    .menu-btn {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      background: none; cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px;
+    }
+    .menu-btn span { display: block; width: 16px; height: 2px; background: var(--ink); border-radius: 1px; }
 
-    /* ── Nav ── */
-    nav { position:fixed; inset:0 0 auto 0; z-index:100; background:rgba(5,6,8,.7); backdrop-filter:blur(20px) saturate(1.2); border-bottom:1px solid rgba(30,34,48,.5); transition:all .3s; }
-    nav.scrolled { background:rgba(5,6,8,.92); border-bottom-color:var(--border); }
-    .container { max-width:1100px; margin:0 auto; padding:0 24px; position:relative; z-index:2; }
-    .nav-inner { display:flex; align-items:center; justify-content:space-between; height:64px; }
-    .logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text); text-decoration:none; letter-spacing:-.02em; }
-    .logo span { color:var(--accent); }
-    .nav-links { display:flex; gap:28px; list-style:none; }
-    .nav-links a { color:var(--text-2); text-decoration:none; font-size:.88rem; font-weight:500; transition:color .2s; }
-    .nav-links a:hover { color:var(--text); }
-    .nav-cta { display:none; }
-    @media (max-width:768px) {
-      .nav-links { display:none; }
-      .nav-cta { display:block; font-size:.85rem; color:var(--accent); font-weight:600; text-decoration:none; }
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .mobile-header { display: flex; }
+      .container { padding: 0 24px; }
     }
 
     /* ── Hero ── */
-    .hero { padding:160px 0 100px; text-align:center; position:relative; }
-    .hero-badge { display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; background:var(--bg-3); border:1px solid var(--border); font-size:.78rem; color:var(--text-2); margin-bottom:28px; }
-    .hero-badge .pulse { width:8px; height:8px; border-radius:50%; background:var(--green); animation:pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
-    .hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2rem,5vw,3.6rem); font-weight:700; line-height:1.1; letter-spacing:-.03em; max-width:800px; margin:0 auto 24px; }
-    .gradient-text { background:linear-gradient(135deg,#fff 25%,var(--accent-2) 60%,var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .hero p { font-size:clamp(1rem,2vw,1.25rem); color:var(--text-2); max-width:560px; margin:0 auto 40px; line-height:1.6; }
-    .hero-buttons { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-
-    .btn { display:inline-flex; align-items:center; gap:8px; padding:13px 28px; border-radius:12px; font-weight:600; font-size:.92rem; transition:all .3s cubic-bezier(.16,1,.3,1); border:1px solid transparent; position:relative; overflow:hidden; cursor:pointer; text-decoration:none; }
-    .btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.12) 50%,transparent 60%); transform:translateX(-100%); transition:transform .5s; }
-    .btn:hover::before { transform:translateX(100%); }
-    .btn-primary { background:linear-gradient(135deg,var(--accent),var(--pink)); color:#fff; box-shadow:0 4px 24px rgba(99,102,241,.3); }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(99,102,241,.45); }
-    .btn-outline { background:transparent; border-color:var(--border); color:var(--text); backdrop-filter:blur(8px); }
-    .btn-outline:hover { border-color:var(--accent); background:rgba(99,102,241,.08); transform:translateY(-2px); }
-
-    /* ── Scroll hint ── */
-    .scroll-hint { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeInDown 1s 1.5s forwards; }
-    .scroll-hint span { font-size:.7rem; color:var(--text-2); text-transform:uppercase; letter-spacing:.15em; }
-    .scroll-hint .mouse { width:20px; height:32px; border:2px solid var(--text-2); border-radius:10px; position:relative; }
-    .scroll-hint .mouse::after { content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:3px; height:6px; background:var(--accent-2); border-radius:2px; animation:scrollWheel 1.5s ease-in-out infinite; }
-    @keyframes scrollWheel { 0%,100%{top:6px;opacity:1} 50%{top:14px;opacity:0} }
-    @keyframes fadeInDown { to{opacity:1} }
+    .hero {
+      padding: 120px 0 80px; border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { color: var(--accent); font-style: italic; }
+    .hero p {
+      font-size: 1.15rem; color: var(--ink-2); max-width: 540px;
+      line-height: 1.7; margin-bottom: 32px;
+    }
+    .hero-meta {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      color: var(--ink-3);
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
 
     /* ── Sections ── */
-    .section { padding:90px 0; position:relative; }
-    .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.4rem,3vw,1.8rem); font-weight:700; margin-bottom:48px; display:flex; align-items:center; gap:14px; }
-    .section-title .line { flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
-    .section-title .line-left { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--border)); }
+    .section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    .section:last-of-type { border-bottom: none; }
+    .section-header {
+      display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px;
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      color: var(--accent); font-weight: 600; letter-spacing: 0.05em;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700; flex: 1;
+    }
+    .section-intro {
+      font-size: 1.05rem; color: var(--ink-2); max-width: 600px;
+      margin-bottom: 40px; line-height: 1.7;
+    }
 
-    /* ── Stage Cards ── */
-    .stages-grid { display:grid; gap:16px; }
-    .stage-card { background:rgba(12,14,18,.6); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all .4s cubic-bezier(.16,1,.3,1); position:relative; }
-    .stage-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
-    .stage-card.active { border-color:var(--accent); }
-    .stage-header { display:flex; align-items:center; gap:16px; padding:20px 24px; cursor:pointer; }
-    .stage-num { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; flex-shrink:0; }
-    .stage-num.n1 { background:rgba(99,102,241,.12); color:var(--accent); }
-    .stage-num.n2 { background:rgba(236,72,153,.12); color:var(--pink); }
-    .stage-num.n3 { background:rgba(6,182,212,.12); color:var(--cyan); }
-    .stage-num.n4 { background:rgba(34,197,94,.12); color:var(--green); }
-    .stage-num.n5 { background:rgba(245,158,11,.12); color:var(--orange); }
-    .stage-num.n6 { background:rgba(168,85,247,.12); color:#a855f7; }
-    .stage-title-wrap { flex:1; }
-    .stage-title-wrap h3 { font-size:1.05rem; font-weight:600; margin-bottom:2px; }
-    .stage-title-wrap span { font-size:.82rem; color:var(--text-3); }
-    .stage-toggle { width:32px; height:32px; border-radius:8px; background:var(--bg-3); display:flex; align-items:center; justify-content:center; color:var(--text-2); transition:all .3s; flex-shrink:0; }
-    .stage-card.active .stage-toggle { transform:rotate(180deg); background:var(--accent); color:#fff; }
-    .stage-body { max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.16,1,.3,1); }
-    .stage-card.active .stage-body { max-height:800px; }
-    .stage-inner { padding:0 24px 24px; }
-    .stage-visual { display:flex; align-items:center; gap:12px; padding:16px; background:var(--bg-2); border-radius:12px; margin-bottom:20px; font-size:.88rem; color:var(--text-2); flex-wrap:wrap; }
-    .stage-visual .arrow { color:var(--text-3); font-size:1.2rem; }
-    .stage-visual .entity { padding:6px 12px; border-radius:8px; background:var(--bg-3); border:1px solid var(--border); font-size:.8rem; font-weight:500; color:var(--text); }
-    .stage-visual .entity.ai { border-color:var(--accent); color:var(--accent-2); }
-    .stage-visual .entity.tool { border-color:var(--green); color:var(--green); }
-    .stage-visual .entity.human { border-color:var(--pink); color:var(--pink); }
-
-    .stage-desc { font-size:.92rem; color:var(--text-2); line-height:1.7; margin-bottom:20px; }
-    .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    @media (max-width:640px) { .detail-grid { grid-template-columns:1fr; } }
-    .detail-box { background:var(--bg-2); border:1px solid var(--border); border-radius:12px; padding:16px; }
-    .detail-box h4 { font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-3); margin-bottom:10px; font-weight:600; }
-    .detail-box ul { list-style:none; font-size:.85rem; color:var(--text-2); }
-    .detail-box li { padding:4px 0; display:flex; align-items:flex-start; gap:8px; }
-    .detail-box li::before { content:'•'; color:var(--accent); font-weight:700; }
-    .detail-box code { background:var(--bg-3); padding:2px 6px; border-radius:4px; font-size:.8rem; color:var(--accent-2); font-family:'SF Mono',monospace; }
+    /* ── Stage blocks ── */
+    .stage-block {
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 16px; overflow: hidden; background: #fff;
+      transition: box-shadow 0.3s;
+    }
+    .stage-block:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .stage-block.expanded { border-color: var(--border-2); }
+    .stage-bar {
+      display: flex; align-items: center; gap: 20px; padding: 20px 24px;
+      cursor: pointer; user-select: none;
+    }
+    .stage-bar:hover { background: var(--paper); }
+    .stage-badge {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;
+      font-weight: 600; flex-shrink: 0;
+    }
+    .stage-badge.s1 { background: var(--blue-light); color: var(--blue); }
+    .stage-badge.s2 { background: var(--purple-light); color: var(--purple); }
+    .stage-badge.s3 { background: var(--accent-light); color: var(--accent); }
+    .stage-badge.s4 { background: var(--green-light); color: var(--green); }
+    .stage-badge.s5 { background: #fff3e0; color: #e65100; }
+    .stage-badge.s6 { background: #fce4ec; color: #c2185b; }
+    .stage-info { flex: 1; }
+    .stage-info h3 {
+      font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;
+      font-family: 'Playfair Display', serif;
+    }
+    .stage-info p { font-size: 0.88rem; color: var(--ink-3); }
+    .stage-arrow {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s; color: var(--ink-3);
+    }
+    .stage-block.expanded .stage-arrow { transform: rotate(180deg); }
+    .stage-drawer {
+      max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .stage-block.expanded .stage-drawer { max-height: 900px; }
+    .stage-drawer-inner {
+      padding: 0 24px 24px 92px;
+    }
+    @media (max-width: 640px) {
+      .stage-drawer-inner { padding: 0 20px 20px 20px; }
+    }
+    .stage-flow {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      padding: 14px 16px; background: var(--paper); border-radius: 10px;
+      margin-bottom: 20px; font-size: 0.85rem;
+    }
+    .stage-flow .node {
+      padding: 5px 12px; border-radius: 6px; font-size: 0.8rem;
+      font-weight: 500; border: 1px solid var(--border);
+      background: #fff;
+    }
+    .stage-flow .node.ai { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .stage-flow .node.human { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+    .stage-flow .node.tool { border-color: var(--green); color: var(--green); background: var(--green-light); }
+    .stage-flow .arrow { color: var(--ink-3); font-size: 1rem; }
+    .stage-desc {
+      font-size: 0.95rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 20px;
+    }
+    .stage-details {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    @media (max-width: 640px) { .stage-details { grid-template-columns: 1fr; } }
+    .detail-col {
+      background: var(--paper); border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px;
+    }
+    .detail-col h4 {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--ink-3); margin-bottom: 12px; font-weight: 600;
+    }
+    .detail-col ul { list-style: none; font-size: 0.87rem; color: var(--ink-2); }
+    .detail-col li { padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; }
+    .detail-col li::before { content: '—'; color: var(--accent); font-weight: 600; }
+    .detail-col code {
+      font-family: 'JetBrains Mono', monospace; background: var(--paper-3);
+      padding: 2px 6px; border-radius: 4px; font-size: 0.82rem; color: var(--accent);
+    }
 
     /* ── Patterns ── */
-    .patterns { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%,300px),1fr)); gap:16px; }
-    .pattern-card { background:rgba(12,14,18,.6); border:1px solid var(--border); border-radius:16px; padding:24px; transition:all .3s; }
-    .pattern-card:hover { border-color:var(--accent); transform:translateY(-3px); }
-    .pattern-card .icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:16px; background:var(--bg-3); }
-    .pattern-card h3 { font-size:1.05rem; font-weight:600; margin-bottom:8px; }
-    .pattern-card p { font-size:.88rem; color:var(--text-2); line-height:1.6; }
+    .pattern-list { display: flex; flex-direction: column; gap: 16px; }
+    .pattern-row {
+      display: flex; gap: 20px; padding: 24px; background: #fff;
+      border: 1px solid var(--border); border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .pattern-row:hover { border-color: var(--border-2); transform: translateX(4px); }
+    .pattern-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0; background: var(--paper-2);
+    }
+    .pattern-body h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 6px;
+    }
+    .pattern-body p { font-size: 0.9rem; color: var(--ink-2); line-height: 1.7; }
 
     /* ── Frameworks ── */
-    .frameworks-table { width:100%; border-collapse:collapse; font-size:.88rem; }
-    .frameworks-table th { text-align:left; padding:14px 16px; background:var(--bg-2); border-bottom:1px solid var(--border); font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-3); font-weight:600; }
-    .frameworks-table td { padding:14px 16px; border-bottom:1px solid var(--border); color:var(--text-2); vertical-align:top; }
-    .frameworks-table tr:hover td { background:rgba(255,255,255,.02); }
-    .fw-name { font-weight:600; color:var(--text); display:flex; align-items:center; gap:8px; }
-    .fw-tag { font-size:.72rem; padding:3px 8px; border-radius:6px; background:var(--bg-3); border:1px solid var(--border); color:var(--text-2); white-space:nowrap; }
-    .fw-tag.best { border-color:var(--green); color:var(--green); }
-    @media (max-width:768px) {
-      .frameworks-table thead { display:none; }
-      .frameworks-table tr { display:block; margin-bottom:16px; background:rgba(12,14,18,.6); border:1px solid var(--border); border-radius:12px; padding:16px; }
-      .frameworks-table td { display:block; padding:6px 0; border:none; }
-      .frameworks-table td::before { content:attr(data-label) ": "; font-weight:600; color:var(--text-3); font-size:.78rem; text-transform:uppercase; }
+    .fw-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 16px;
+    }
+    .fw-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; transition: all 0.3s;
+    }
+    .fw-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .fw-card .tag {
+      display: inline-block; font-size: 0.68rem; text-transform: uppercase;
+      letter-spacing: 0.08em; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+      margin-bottom: 14px;
+    }
+    .fw-card .tag.beginner { background: var(--green-light); color: var(--green); }
+    .fw-card .tag.engineer { background: var(--blue-light); color: var(--blue); }
+    .fw-card .tag.experimental { background: var(--accent-light); color: var(--accent); }
+    .fw-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 8px; }
+    .fw-card p { font-size: 0.88rem; color: var(--ink-2); line-height: 1.6; }
+    .fw-card .meta {
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--ink-3);
     }
 
-    /* ── MCP section ── */
-    .mcp-card { background:linear-gradient(135deg, rgba(99,102,241,.08), rgba(236,72,153,.05)); border:1px solid var(--border); border-radius:16px; padding:32px; position:relative; overflow:hidden; }
-    .mcp-card::before { content:''; position:absolute; top:-50%; right:-20%; width:300px; height:300px; border-radius:50%; background:var(--accent); filter:blur(120px); opacity:.06; pointer-events:none; }
-    .mcp-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; margin-bottom:12px; }
-    .mcp-card p { color:var(--text-2); font-size:.92rem; line-height:1.7; max-width:640px; }
+    /* ── MCP ── */
+    .mcp-block {
+      background: var(--blue); color: #fff; border-radius: 12px;
+      padding: 40px; position: relative; overflow: hidden;
+    }
+    .mcp-block::before {
+      content: ''; position: absolute; top: -40%; right: -10%;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(255,255,255,0.04); pointer-events: none;
+    }
+    .mcp-block h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 16px;
+    }
+    .mcp-block p { opacity: 0.85; font-size: 0.98rem; line-height: 1.7; max-width: 580px; }
+    .mcp-tools {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px;
+    }
+    .mcp-tools span {
+      padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.82rem; font-family: 'JetBrains Mono', monospace;
+    }
 
     /* ── Footer ── */
-    footer { padding:60px 0 40px; text-align:center; border-top:1px solid var(--border); margin-top:60px; }
-    footer p { color:var(--text-3); font-size:.85rem; }
-    footer a { color:var(--text-2); text-decoration:none; }
-    footer a:hover { color:var(--accent-2); }
-
-    /* ── Responsive ── */
-    @media (max-width:768px) {
-      .hero { padding:120px 0 60px; }
-      .section { padding:50px 0; }
-      .stage-header { padding:16px 20px; }
-      .stage-inner { padding:0 20px 20px; }
+    footer {
+      padding: 48px 0; text-align: center; border-top: 1px solid var(--border);
+      font-size: 0.85rem; color: var(--ink-3);
     }
-    @media (prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+    footer a { color: var(--accent); text-decoration: none; }
 
-    /* ── Utility ── */
-    .text-center { text-align:center; }
-    .mb-8 { margin-bottom:8px; }
-    .mb-16 { margin-bottom:16px; }
-    .mb-24 { margin-bottom:24px; }
-    .mb-32 { margin-bottom:32px; }
-    .mt-16 { margin-top:16px; }
+    /* ── Animations ── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"><div class="cursor-ring"></div><div class="cursor-dot"></div></div>
-<canvas id="bgCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
-<div class="noise"></div>
-<div class="blob" style="width:500px;height:500px;background:var(--accent);top:-10%;right:-15%"></div>
-<div class="blob" style="width:400px;height:400px;background:var(--pink);top:30%;left:-15%;animation-delay:-5s"></div>
-<div class="blob" style="width:350px;height:350px;background:var(--cyan);bottom:10%;right:-10%;animation-delay:-10s;opacity:.08"></div>
+<div class="grid-bg"></div>
 
-<nav id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#" class="logo">Agentic<span>AI</span></a>
-      <ul class="nav-links">
-        <li><a href="#stages">Stages</a></li>
-        <li><a href="#patterns">Patterns</a></li>
-        <li><a href="#frameworks">Frameworks</a></li>
-        <li><a href="#mcp">MCP</a></li>
-      </ul>
-      <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="nav-cta" target="_blank">GitHub →</a>
-    </div>
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">Agentic<span>AI</span></div>
+  <div class="sidebar-sub">v1.0 &mdash; May 2026</div>
+
+  <div class="nav-section">Navigate</div>
+  <ul class="nav-links">
+    <li><a href="#overview" class="active" onclick="setActive(this)"><span class="num">00</span>Overview</a></li>
+    <li><a href="#stages" onclick="setActive(this)"><span class="num">01</span>The 6 Stages</a></li>
+    <li><a href="#patterns" onclick="setActive(this)"><span class="num">02</span>Patterns</a></li>
+    <li><a href="#frameworks" onclick="setActive(this)"><span class="num">03</span>Frameworks</a></li>
+    <li><a href="#mcp" onclick="setActive(this)"><span class="num">04</span>MCP &amp; Tools</a></li>
+  </ul>
+
+  <div class="nav-section">Resources</div>
+  <ul class="nav-links">
+    <li><a href="https://github.com/jlaiii/agentic-ai-roadmap" target="_blank">GitHub Repo &nearr;</a></li>
+    <li><a href="https://github.com/jlaiii/agentic-ai-roadmap/issues" target="_blank">Submit Research &nearr;</a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    A living research project.<br>
+    Built by <a href="https://github.com/jlaiii" target="_blank">@jlaiii</a>.<br>
+    Open source. Contributions welcome.
   </div>
-</nav>
+</aside>
 
-<section class="hero">
-  <div class="container">
-    <div class="hero-badge fade-up"><div class="pulse"></div> Living Research — Updated May 2026</div>
-    <h1 class="fade-up">From Chatbots to <span class="gradient-text">Autonomous AI Workers</span></h1>
-    <p class="fade-up">A human-friendly roadmap for understanding, building, and deploying agentic AI systems — whether you're a beginner exploring the idea or an engineer wiring up multi-agent swarms.</p>
-    <div class="hero-buttons fade-up">
-      <a href="#stages" class="btn btn-primary">Explore the Stages</a>
-      <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="btn btn-outline" target="_blank">View on GitHub</a>
+<!-- Mobile header -->
+<div class="mobile-header">
+  <div class="logo">Agentic<span style="color:var(--accent);font-style:italic;">AI</span></div>
+  <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- Hero -->
+  <section class="hero" id="overview">
+    <div class="container">
+      <div class="hero-label">Living Research / Field Guide</div>
+      <h1>From Chatbots to <em>Autonomous Workers</em></h1>
+      <p>A human-friendly roadmap for understanding, building, and deploying agentic AI systems — whether you're a beginner exploring the idea or an engineer wiring up multi-agent swarms.</p>
+      <div class="hero-meta">
+        <span>● 6 Stages</span>
+        <span>● 3 Patterns</span>
+        <span>● 5 Frameworks</span>
+        <span>● Updated May 2026</span>
+      </div>
     </div>
-  </div>
-  <div class="scroll-hint"><span>Scroll</span><div class="mouse"></div></div>
-</section>
+  </section>
 
-<!-- ═══ STAGES ═══ -->
-<section class="section" id="stages">
-  <div class="container">
-    <div class="section-title fade-up"><span class="line-left"></span>The 6 Stages<span class="line"></span></div>
-    <p class="fade-up mb-32" style="color:var(--text-2);max-width:640px;">Each stage adds a new capability. You don't need to jump to the end — most value today comes from Stage 3 and 4.</p>
+  <!-- Stages -->
+  <section class="section" id="stages">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2>The 6 Stages</h2>
+      </div>
+      <p class="section-intro reveal">Each stage adds a new capability. You don't need to jump to the end — most real-world value today comes from Stage 3 and 4.</p>
 
-    <div class="stages-grid">
-
-      <!-- Stage 1 -->
-      <div class="stage-card fade-up" data-stage="1">
-        <div class="stage-header" onclick="toggleStage(1)">
-          <div class="stage-num n1">01</div>
-          <div class="stage-title-wrap">
+      <div class="stage-block reveal" data-stage="1">
+        <div class="stage-bar" onclick="toggleStage(1)">
+          <div class="stage-badge s1">01</div>
+          <div class="stage-info">
             <h3>Chatbot</h3>
-            <span>Passive Q&A — you ask, it answers</span>
+            <p>Passive Q&amp;A — you ask, it answers. No tools, no memory, no action.</p>
           </div>
-          <div class="stage-toggle">▼</div>
+          <div class="stage-arrow">▼</div>
         </div>
-        <div class="stage-body">
-          <div class="stage-inner">
-            <div class="stage-visual">
-              <span class="entity human">👤 You</span>
+        <div class="stage-drawer">
+          <div class="stage-drawer-inner">
+            <div class="stage-flow">
+              <span class="node human">You</span>
               <span class="arrow">→</span>
-              <span class="entity">"What's the weather?"</span>
+              <span class="node">"What's the weather?"</span>
               <span class="arrow">→</span>
-              <span class="entity ai">🤖 AI</span>
+              <span class="node ai">AI</span>
               <span class="arrow">→</span>
-              <span class="entity">"It's sunny, 72°F."</span>
+              <span class="node">"72°F and sunny."</span>
             </div>
-            <p class="stage-desc">The simplest form. A single prompt in, a single response out. No memory, no tools, no action. Think ChatGPT in its most basic mode, or a customer support FAQ bot.</p>
-            <div class="detail-grid">
-              <div class="detail-box">
+            <p class="stage-desc">The simplest form. A single prompt in, a single response out. Think ChatGPT in basic mode, or a customer support FAQ bot.</p>
+            <div class="stage-details">
+              <div class="detail-col">
                 <h4>For Beginners</h4>
                 <ul>
                   <li>Start with ChatGPT, Claude, or Gemini</li>
@@ -259,12 +423,12 @@
                   <li>Experiment with role prompts</li>
                 </ul>
               </div>
-              <div class="detail-box">
+              <div class="detail-col">
                 <h4>Engineer Details</h4>
                 <ul>
                   <li>Single-turn inference via REST API</li>
                   <li>Context window management</li>
-                  <li>System prompts & temperature tuning</li>
+                  <li>System prompts &amp; temperature tuning</li>
                 </ul>
               </div>
             </div>
@@ -272,27 +436,27 @@
         </div>
       </div>
 
-      <!-- Stage 2 -->
-      <div class="stage-card fade-up" data-stage="2">
-        <div class="stage-header" onclick="toggleStage(2)">
-          <div class="stage-num n2">02</div>
-          <div class="stage-title-wrap">
+      <div class="stage-block reveal" data-stage="2">
+        <div class="stage-bar" onclick="toggleStage(2)">
+          <div class="stage-badge s2">02</div>
+          <div class="stage-info">
             <h3>Copilot</h3>
-            <span>AI assists — you stay in the driver's seat</span>
+            <p>AI assists — you stay in the driver's seat. Real-time suggestions.</p>
           </div>
-          <div class="stage-toggle">▼</div>
+          <div class="stage-arrow">▼</div>
         </div>
-        <div class="stage-body">
-          <div class="stage-inner">
-            <div class="stage-visual">
-              <span class="entity human">👤 You</span>
+        <div class="stage-drawer">
+          <div class="stage-drawer-inner">
+            <div class="stage-flow">
+              <span class="node human">You</span>
               <span class="arrow">↔</span>
-              <span class="entity ai">🤖 Copilot</span>
-              <span class="entity tool">🛠️ IDE / Doc</span>
+              <span class="node ai">Copilot</span>
+              <span class="arrow">+</span>
+              <span class="node tool">IDE / Doc</span>
             </div>
-            <p class="stage-desc">The AI works alongside you in real-time. GitHub Copilot suggests code as you type. Notion AI rewrites your paragraphs. You approve every change — the AI never acts alone.</p>
-            <div class="detail-grid">
-              <div class="detail-box">
+            <p class="stage-desc">The AI works alongside you. GitHub Copilot suggests code as you type. Notion AI rewrites paragraphs. You approve every change — the AI never acts alone.</p>
+            <div class="stage-details">
+              <div class="detail-col">
                 <h4>For Beginners</h4>
                 <ul>
                   <li>Try GitHub Copilot or Cursor IDE</li>
@@ -300,7 +464,7 @@
                   <li>Think "assistant," not "replacement"</li>
                 </ul>
               </div>
-              <div class="detail-box">
+              <div class="detail-col">
                 <h4>Engineer Details</h4>
                 <ul>
                   <li>Inline completion APIs (streaming SSE)</li>
@@ -313,44 +477,43 @@
         </div>
       </div>
 
-      <!-- Stage 3 -->
-      <div class="stage-card fade-up" data-stage="3">
-        <div class="stage-header" onclick="toggleStage(3)">
-          <div class="stage-num n3">03</div>
-          <div class="stage-title-wrap">
+      <div class="stage-block reveal expanded" data-stage="3">
+        <div class="stage-bar" onclick="toggleStage(3)">
+          <div class="stage-badge s3">03</div>
+          <div class="stage-info">
             <h3>Agent</h3>
-            <span>AI picks a tool and completes the task</span>
+            <p>AI picks a tool and completes the task. This is where "agentic" begins.</p>
           </div>
-          <div class="stage-toggle">▼</div>
+          <div class="stage-arrow">▼</div>
         </div>
-        <div class="stage-body">
-          <div class="stage-inner">
-            <div class="stage-visual">
-              <span class="entity human">👤 Goal</span>
+        <div class="stage-drawer">
+          <div class="stage-drawer-inner">
+            <div class="stage-flow">
+              <span class="node human">Goal</span>
               <span class="arrow">→</span>
-              <span class="entity ai">🤖 Agent</span>
+              <span class="node ai">Agent</span>
               <span class="arrow">⚡</span>
-              <span class="entity tool">🔧 Tool</span>
+              <span class="node tool">Tool</span>
               <span class="arrow">→</span>
-              <span class="entity tool">📊 Result</span>
+              <span class="node">Result</span>
             </div>
-            <p class="stage-desc">You give a goal, the AI reasons, picks the right tool, executes, and returns a result. It can browse the web, query a database, or run code — all without you micromanaging each step. This is where "agentic" actually begins.</p>
-            <div class="detail-grid">
-              <div class="detail-box">
+            <p class="stage-desc">You give a goal, the AI reasons, picks the right tool, executes, and returns a result. It can browse the web, query a database, or run code — all without micromanagement.</p>
+            <div class="stage-details">
+              <div class="detail-col">
                 <h4>For Beginners</h4>
                 <ul>
                   <li>Try ChatGPT with Code Interpreter</li>
                   <li>Use Perplexity for research with sources</li>
-                  <li>Build a simple zapier + OpenAI flow</li>
+                  <li>Build a simple Zapier + OpenAI flow</li>
                 </ul>
               </div>
-              <div class="detail-box">
+              <div class="detail-col">
                 <h4>Engineer Details</h4>
                 <ul>
                   <li>ReAct pattern: Reason → Act → Observe</li>
                   <li>Tool schemas (OpenAI function calling)</li>
                   <li>Loop until task complete or max iterations</li>
-                  <li>Key frameworks: <code>LangChain</code>, <code>OpenAI Agents SDK</code></li>
+                  <li>Key: <code>LangChain</code>, <code>OpenAI Agents SDK</code></li>
                 </ul>
               </div>
             </div>
@@ -358,30 +521,29 @@
         </div>
       </div>
 
-      <!-- Stage 4 -->
-      <div class="stage-card fade-up" data-stage="4">
-        <div class="stage-header" onclick="toggleStage(4)">
-          <div class="stage-num n4">04</div>
-          <div class="stage-title-wrap">
+      <div class="stage-block reveal" data-stage="4">
+        <div class="stage-bar" onclick="toggleStage(4)">
+          <div class="stage-badge s4">04</div>
+          <div class="stage-info">
             <h3>Multi-Agent Team</h3>
-            <span>Specialized agents hand off work to each other</span>
+            <p>Specialized agents hand off work to each other.</p>
           </div>
-          <div class="stage-toggle">▼</div>
+          <div class="stage-arrow">▼</div>
         </div>
-        <div class="stage-body">
-          <div class="stage-inner">
-            <div class="stage-visual">
-              <span class="entity ai">🔍 Researcher</span>
+        <div class="stage-drawer">
+          <div class="stage-drawer-inner">
+            <div class="stage-flow">
+              <span class="node ai">Researcher</span>
               <span class="arrow">→</span>
-              <span class="entity ai">✍️ Writer</span>
+              <span class="node ai">Writer</span>
               <span class="arrow">→</span>
-              <span class="entity ai">🔎 Editor</span>
+              <span class="node ai">Editor</span>
               <span class="arrow">→</span>
-              <span class="entity">📄 Final Doc</span>
+              <span class="node">Final Doc</span>
             </div>
-            <p class="stage-desc">Instead of one generalist agent, you have a team. A researcher gathers data, a writer drafts the report, an editor polishes it. Each has a role, tools, and memory. A supervisor (or graph) routes tasks between them.</p>
-            <div class="detail-grid">
-              <div class="detail-box">
+            <p class="stage-desc">Instead of one generalist, you have a team. A researcher gathers data, a writer drafts, an editor polishes. Each has a role, tools, and memory. A supervisor routes tasks between them.</p>
+            <div class="stage-details">
+              <div class="detail-col">
                 <h4>For Beginners</h4>
                 <ul>
                   <li>Try CrewAI with pre-built crews</li>
@@ -389,13 +551,13 @@
                   <li>Start linear, add loops later</li>
                 </ul>
               </div>
-              <div class="detail-box">
+              <div class="detail-col">
                 <h4>Engineer Details</h4>
                 <ul>
                   <li>Supervisor pattern: central router + workers</li>
                   <li>LangGraph for cyclic / conditional flows</li>
                   <li>Shared state / scratchpads between agents</li>
-                  <li>Human-in-the-loop interrupts for approvals</li>
+                  <li>Human-in-the-loop interrupts</li>
                 </ul>
               </div>
             </div>
@@ -403,42 +565,41 @@
         </div>
       </div>
 
-      <!-- Stage 5 -->
-      <div class="stage-card fade-up" data-stage="5">
-        <div class="stage-header" onclick="toggleStage(5)">
-          <div class="stage-num n5">05</div>
-          <div class="stage-title-wrap">
+      <div class="stage-block reveal" data-stage="5">
+        <div class="stage-bar" onclick="toggleStage(5)">
+          <div class="stage-badge s5">05</div>
+          <div class="stage-info">
             <h3>Agent Swarm</h3>
-            <span>Agents debate, review, and self-correct</span>
+            <p>Agents debate, review, and self-correct to find the best answer.</p>
           </div>
-          <div class="stage-toggle">▼</div>
+          <div class="stage-arrow">▼</div>
         </div>
-        <div class="stage-body">
-          <div class="stage-inner">
-            <div class="stage-visual">
-              <span class="entity ai">💡 Proposer</span>
-              <span class="entity ai">🧐 Critic</span>
-              <span class="entity ai">🔧 Fixer</span>
-              <span class="entity ai">✅ Judge</span>
-              <span style="margin-left:auto" class="entity">Best Answer</span>
+        <div class="stage-drawer">
+          <div class="stage-drawer-inner">
+            <div class="stage-flow">
+              <span class="node ai">Proposer</span>
+              <span class="node ai">Critic</span>
+              <span class="node ai">Fixer</span>
+              <span class="node ai">Judge</span>
+              <span style="margin-left:auto" class="node">Best Answer</span>
             </div>
-            <p class="stage-desc">Multiple agents compete or collaborate to find the best answer. One proposes a solution, another critiques it, a third fixes the flaws, and a judge picks the winner. This dramatically improves quality on complex reasoning tasks.</p>
-            <div class="detail-grid">
-              <div class="detail-box">
+            <p class="stage-desc">Multiple agents compete or collaborate to find the best answer. One proposes, another critiques, a third fixes, and a judge picks the winner. Quality goes up; cost goes up linearly.</p>
+            <div class="stage-details">
+              <div class="detail-col">
                 <h4>For Beginners</h4>
                 <ul>
                   <li>AutoGen group chats feel like Slack debates</li>
-                  <li>Set up a "red team" agent to challenge answers</li>
-                  <li>Use for high-stakes decisions: strategy, code review</li>
+                  <li>Set up a "red team" to challenge answers</li>
+                  <li>Use for high-stakes: strategy, code review</li>
                 </ul>
               </div>
-              <div class="detail-box">
+              <div class="detail-col">
                 <h4>Engineer Details</h4>
                 <ul>
-                  <li>Debate / Critic pattern: generate → critique → revise</li>
-                  <li>Consensus algorithms: voting, confidence scoring</li>
-                  <li>AutoGen <code>GroupChat</code> with selector function</li>
-                  <li>Cost explodes linearly with agents — use sparingly</li>
+                  <li>Debate pattern: generate → critique → revise</li>
+                  <li>Consensus: voting, confidence scoring</li>
+                  <li>AutoGen <code>GroupChat</code> with selector</li>
+                  <li>Cost explodes with agent count — use sparingly</li>
                 </ul>
               </div>
             </div>
@@ -446,44 +607,43 @@
         </div>
       </div>
 
-      <!-- Stage 6 -->
-      <div class="stage-card fade-up" data-stage="6">
-        <div class="stage-header" onclick="toggleStage(6)">
-          <div class="stage-num n6">06</div>
-          <div class="stage-title-wrap">
+      <div class="stage-block reveal" data-stage="6">
+        <div class="stage-bar" onclick="toggleStage(6)">
+          <div class="stage-badge s6">06</div>
+          <div class="stage-info">
             <h3>Autonomous Organization</h3>
-            <span>AI workers managing other AI workers</span>
+            <p>AI workers managing other AI workers. Minimal human oversight.</p>
           </div>
-          <div class="stage-toggle">▼</div>
+          <div class="stage-arrow">▼</div>
         </div>
-        <div class="stage-body">
-          <div class="stage-inner">
-            <div class="stage-visual">
-              <span class="entity ai">📋 Planner</span>
+        <div class="stage-drawer">
+          <div class="stage-drawer-inner">
+            <div class="stage-flow">
+              <span class="node ai">Planner</span>
               <span class="arrow">→</span>
-              <span class="entity ai">👷 5 Workers</span>
+              <span class="node ai">5 Workers</span>
               <span class="arrow">→</span>
-              <span class="entity ai">📊 Evaluator</span>
+              <span class="node ai">Evaluator</span>
               <span class="arrow">↻</span>
-              <span class="entity ai">📋 Planner</span>
+              <span class="node ai">Planner</span>
             </div>
-            <p class="stage-desc">The AI designs its own org chart. A planner breaks goals into subtasks, delegates to worker agents, evaluates results, and replans if needed. Humans set the mission and guardrails; the system handles execution.</p>
-            <div class="detail-grid">
-              <div class="detail-box">
+            <p class="stage-desc">The AI designs its own org chart. A planner breaks goals into subtasks, delegates to workers, evaluates results, and replans if needed. Humans set the mission; the system handles execution.</p>
+            <div class="stage-details">
+              <div class="detail-col">
                 <h4>For Beginners</h4>
                 <ul>
-                  <li>Not production-ready for most businesses yet</li>
-                  <li>Best for R&D, content pipelines, or codebases</li>
+                  <li>Not production-ready for most yet</li>
+                  <li>Best for R&amp;D, content pipelines, codebases</li>
                   <li>Requires strong observability and kill-switches</li>
                 </ul>
               </div>
-              <div class="detail-box">
+              <div class="detail-col">
                 <h4>Engineer Details</h4>
                 <ul>
-                  <li>Meta-agent architecture: agent that creates agents</li>
-                  <li>Hierarchical planning with Hierarchical Task Networks</li>
+                  <li>Meta-agent: agent that creates agents</li>
+                  <li>Hierarchical planning with HTNs</li>
                   <li>Self-evaluation loops + reward models</li>
-                  <li>Observability: LangSmith, Weights & Biases, OpenTelemetry</li>
+                  <li>Observability: LangSmith, W&amp;B, OpenTelemetry</li>
                 </ul>
               </div>
             </div>
@@ -492,166 +652,179 @@
       </div>
 
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ PATTERNS ═══ -->
-<section class="section" id="patterns">
-  <div class="container">
-    <div class="section-title fade-up"><span class="line-left"></span>Orchestration Patterns<span class="line"></span></div>
-    <p class="fade-up mb-32" style="color:var(--text-2);max-width:640px;">How you wire agents together matters more than how smart each one is. These are the three dominant patterns in production.</p>
-
-    <div class="patterns">
-      <div class="pattern-card fade-up">
-        <div class="icon">🎯</div>
-        <h3>Supervisor</h3>
-        <p>A central supervisor receives the request, breaks it into subtasks, and delegates to specialized worker agents. The supervisor validates outputs and synthesizes the final answer. Most common production pattern — simple and debuggable.</p>
+  <!-- Patterns -->
+  <section class="section" id="patterns">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2>Orchestration Patterns</h2>
       </div>
-      <div class="pattern-card fade-up">
-        <div class="icon">⚡</div>
-        <h3>Debate / Critic</h3>
-        <p>One agent proposes, another critiques, a third revises. Repeat until consensus or max rounds. Used for high-stakes tasks like code review, strategy, or medical reasoning. Quality goes up; cost goes up linearly.</p>
-      </div>
-      <div class="pattern-card fade-up">
-        <div class="icon">🐝</div>
-        <h3>Swarm</h3>
-        <p>Many lightweight agents work in parallel on subtasks, then aggregate results. Great for search, data collection, or brute-force exploration. Think MapReduce but with reasoning agents.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <p class="section-intro reveal">How you wire agents together matters more than how smart each one is. These are the three dominant patterns in production.</p>
 
-<!-- ═══ FRAMEWORKS ═══ -->
-<section class="section" id="frameworks">
-  <div class="container">
-    <div class="section-title fade-up"><span class="line-left"></span>Frameworks<span class="line"></span></div>
-    <p class="fade-up mb-32" style="color:var(--text-2);max-width:640px;">Pick the framework that matches your team's skill level and the complexity of your workflow.</p>
-
-    <div style="overflow-x:auto" class="fade-up">
-      <table class="frameworks-table">
-        <thead>
-          <tr>
-            <th>Framework</th>
-            <th>Best For</th>
-            <th>Pattern</th>
-            <th>Learning Curve</th>
-            <th>Production</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="fw-name">CrewAI <span class="fw-tag">Beginner</span></div></td>
-            <td data-label="Best For">Rapid prototypes, role-based teams, readable configs</td>
-            <td data-label="Pattern">Role-based crew with tasks</td>
-            <td data-label="Learning">Low — YAML-like agent defs</td>
-            <td data-label="Production">Good for linear flows</td>
-          </tr>
-          <tr>
-            <td><div class="fw-name">LangGraph <span class="fw-tag best">Engineers</span></div></td>
-            <td data-label="Best For">Cyclic workflows, branching logic, heavy observability</td>
-            <td data-label="Pattern">Graph nodes = agents/tools</td>
-            <td data-label="Learning">Medium — graph mental model</td>
-            <td data-label="Production">Best for complex stateful flows</td>
-          </tr>
-          <tr>
-            <td><div class="fw-name">AutoGen</div></td>
-            <td data-label="Best For">Conversational debates, group chats, consensus</td>
-            <td data-label="Pattern">GroupChat + selector</td>
-            <td data-label="Learning">Medium — conversation-driven</td>
-            <td data-label="Production">Great for multi-turn dialogue</td>
-          </tr>
-          <tr>
-            <td><div class="fw-name">OpenAI Agents SDK</div></td>
-            <td data-label="Best For">Minimal abstractions, raw control, OpenAI-native</td>
-            <td data-label="Pattern">Agent + handoffs</td>
-            <td data-label="Learning">Low — thin wrapper</td>
-            <td data-label="Production">New but promising</td>
-          </tr>
-          <tr>
-            <td><div class="fw-name">Google ADK</div></td>
-            <td data-label="Best For">Google Cloud shops, Vertex AI integration</td>
-            <td data-label="Pattern">Multi-agent + tools</td>
-            <td data-label="Learning">Medium</td>
-            <td data-label="Production">Early, Google-centric</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ MCP ═══ -->
-<section class="section" id="mcp">
-  <div class="container">
-    <div class="section-title fade-up"><span class="line-left"></span>MCP & Tools<span class="line"></span></div>
-    <div class="mcp-card fade-up">
-      <h3>Model Context Protocol (MCP)</h3>
-      <p class="mb-16">Think of MCP as "USB-C for AI tools." Introduced by Anthropic in late 2024, it's an open standard that lets any AI agent securely connect to any data source or tool — your filesystem, a database, Slack, GitHub, or a browser — without custom integrations for each pair.</p>
-      <p>Instead of writing a new connector for every tool, you build (or use) an MCP server once, and any MCP-compatible agent can plug into it. This is what made production-grade agents actually possible in 2025.</p>
-      <div class="mt-16" style="display:flex;gap:12px;flex-wrap:wrap;">
-        <span class="entity tool">🌐 Browser Use — agents browse the web</span>
-        <span class="entity tool">🗄️ Database MCP — SQL via natural language</span>
-        <span class="entity tool">📁 Filesystem MCP — read/write local files</span>
-        <span class="entity tool">💬 Slack MCP — send/receive messages</span>
+      <div class="pattern-list">
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🎯</div>
+          <div class="pattern-body">
+            <h3>Supervisor</h3>
+            <p>A central supervisor receives the request, breaks it into subtasks, and delegates to specialized worker agents. The supervisor validates outputs and synthesizes the final answer. Most common production pattern — simple and debuggable.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">⚡</div>
+          <div class="pattern-body">
+            <h3>Debate / Critic</h3>
+            <p>One agent proposes, another critiques, a third revises. Repeat until consensus or max rounds. Used for high-stakes tasks like code review, strategy, or medical reasoning. Quality goes up; cost goes up linearly.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🐝</div>
+          <div class="pattern-body">
+            <h3>Swarm</h3>
+            <p>Many lightweight agents work in parallel on subtasks, then aggregate results. Great for search, data collection, or brute-force exploration. Think MapReduce but with reasoning agents.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ CTA ═══ -->
-<section class="section" style="text-align:center;padding-top:40px;">
-  <div class="container">
-    <div class="fade-up">
-      <h2 class="gradient-text" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin-bottom:20px;">This Is Just the Beginning</h2>
-      <p style="color:var(--text-2);max-width:520px;margin:0 auto 32px;">Agentic AI is moving fast. This roadmap will evolve as new frameworks, patterns, and research emerge. Star the repo to follow along.</p>
-      <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="btn btn-primary" target="_blank">⭐ Star on GitHub</a>
+  <!-- Frameworks -->
+  <section class="section" id="frameworks">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2>Frameworks</h2>
+      </div>
+      <p class="section-intro reveal">Pick the framework that matches your team's skill level and the complexity of your workflow.</p>
+
+      <div class="fw-grid">
+        <div class="fw-card reveal">
+          <span class="tag beginner">Beginner</span>
+          <h3>CrewAI</h3>
+          <p>Rapid prototypes, role-based teams, readable configs. YAML-like agent definitions that non-engineers can understand.</p>
+          <div class="meta">Pattern: Role-based crew</div>
+        </div>
+        <div class="fw-card reveal">
+          <span class="tag engineer">Engineers</span>
+          <h3>LangGraph</h3>
+          <p>Cyclic workflows, branching logic, heavy observability. Best for complex stateful flows that need human-in-the-loop.</p>
+          <div class="meta">Pattern: Graph nodes = agents</div>
+        </div>
+        <div class="fw-card reveal">
+          <span class="tag beginner">Conversational</span>
+          <h3>AutoGen</h3>
+          <p>Group chats, debates, consensus-building. Agents talk to each other like colleagues in a Slack thread.</p>
+          <div class="meta">Pattern: GroupChat + selector</div>
+        </div>
+        <div class="fw-card reveal">
+          <span class="tag experimental">Minimal</span>
+          <h3>OpenAI Agents SDK</h3>
+          <p>Thin wrapper, raw control, OpenAI-native. No heavy abstractions — just agents, tools, and handoffs.</p>
+          <div class="meta">Pattern: Agent + handoffs</div>
+        </div>
+        <div class="fw-card reveal">
+          <span class="tag experimental">Experimental</span>
+          <h3>Google ADK</h3>
+          <p>Google Cloud shops, Vertex AI integration. Early but tightly integrated with Google's ecosystem.</p>
+          <div class="meta">Pattern: Multi-agent + tools</div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="container">
-    <p>Built by <a href="https://github.com/jlaiii" target="_blank">jlaiii</a> · <a href="https://github.com/jlaiii/agentic-ai-roadmap" target="_blank">agentic-ai-roadmap</a> · Living research</p>
-  </div>
-</footer>
+  <!-- MCP -->
+  <section class="section" id="mcp">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2>MCP &amp; Tools</h2>
+      </div>
+
+      <div class="mcp-block reveal">
+        <h3>Model Context Protocol</h3>
+        <p>Think of MCP as "USB-C for AI tools." Introduced by Anthropic in late 2024, it's an open standard that lets any AI agent securely connect to any data source or tool — your filesystem, a database, Slack, GitHub, or a browser — without custom integrations for each pair.</p>
+        <p>Instead of writing a new connector for every tool, you build (or use) an MCP server once, and any MCP-compatible agent can plug into it. This is what made production-grade agents actually possible in 2025.</p>
+        <div class="mcp-tools">
+          <span>🌐 Browser Use</span>
+          <span>🗄️ Database MCP</span>
+          <span>📁 Filesystem MCP</span>
+          <span>💬 Slack MCP</span>
+          <span>🔍 Web Search MCP</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="section" style="text-align:center; padding: 80px 0;">
+    <div class="container">
+      <div class="reveal">
+        <h2 style="font-family:'Playfair Display',serif; font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 16px;">
+          This Is Just the <em style="color:var(--accent);">Beginning</em>
+        </h2>
+        <p style="color: var(--ink-2); max-width: 480px; margin: 0 auto 32px;">
+          Agentic AI is moving fast. This roadmap will evolve as new frameworks, patterns, and research emerge.
+        </p>
+        <a href="https://github.com/jlaiii/agentic-ai-roadmap" class="btn" target="_blank" style="display:inline-block; padding: 14px 32px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 0.95rem;">
+          ⭐ Star on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      Built by <a href="https://github.com/jlaiii" target="_blank">@jlaiii</a> &middot;
+      <a href="https://github.com/jlaiii/agentic-ai-roadmap" target="_blank">agentic-ai-roadmap</a> &middot;
+      Living research
+    </div>
+  </footer>
+
+</main>
 
 <script>
-/* ── Particles ── */
-const canvas=document.getElementById('bgCanvas'), ctx=canvas.getContext('2d');
-let particles=[], COUNT=window.matchMedia('(pointer:coarse)').matches?25:60;
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-resize();addEventListener('resize',resize);
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*1.5+.5;this.a=Math.random()*.3+.05;this.c=Math.random()>.6?'#6366f1':Math.random()>.5?'#ec4899':'#06b6d4'}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.c;ctx.globalAlpha=this.a;ctx.fill();ctx.globalAlpha=1}}
-for(let i=0;i<COUNT;i++)particles.push(new Particle());
-let mx=0,my=0;addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach((p,i)=>{p.update();p.draw();for(let j=i+1;j<particles.length;j++){let dx=p.x-particles[j].x,dy=p.y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='#6366f1';ctx.globalAlpha=(1-d/100)*.06;ctx.lineWidth=.5;ctx.stroke();ctx.globalAlpha=1}}let dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<120){let f=(120-d)/120;p.vx+=(dx/d)*f*.015;p.vy+=(dy/d)*f*.015}});requestAnimationFrame(anim)}
-anim();
+  // Scroll reveal
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-/* ── Cursor ── */
-const cursor=document.getElementById('cursor'),ring=cursor.querySelector('.cursor-ring'),dot=cursor.querySelector('.cursor-dot');
-let cx=0,cy=0,rx=0,ry=0;
-if(!window.matchMedia('(pointer:coarse)').matches){
-  addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px'});
-  function cAnim(){rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(cAnim)}
-  cAnim();
-  document.querySelectorAll('a,button,.btn,.stage-header,.pattern-card').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'))});
-}
+  // Stage toggles
+  function toggleStage(n) {
+    document.querySelectorAll('.stage-block').forEach(b => {
+      if (+b.dataset.stage === n) b.classList.toggle('expanded');
+      else b.classList.remove('expanded');
+    });
+  }
 
-/* ── Scroll reveal ── */
-const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fade-up,.section-title').forEach(el=>obs.observe(el));
+  // Active nav
+  function setActive(el) {
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('sidebar').classList.remove('open');
+  }
 
-/* ── Nav scroll ── */
-const nav=document.getElementById('navbar');
-addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+  // Scroll spy
+  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'mcp'];
+  addEventListener('scroll', () => {
+    let current = 'overview';
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
 
-/* ── Stage toggles ── */
-function toggleStage(n){document.querySelectorAll('.stage-card').forEach(c=>{if(+c.dataset.stage===n){c.classList.toggle('active')}else{c.classList.remove('active')}});}
-// Open stage 3 by default
-document.querySelector('[data-stage="3"]').classList.add('active');
-
-/* ── Smooth scroll ── */
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'})}));
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
 </script>
+
 </body>
 </html>
