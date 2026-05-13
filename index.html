@@ -433,9 +433,11 @@
     <li><a href="#stages" onclick="setActive(this)"><span class="num">01</span>The 6 Stages</a></li>
     <li><a href="#patterns" onclick="setActive(this)"><span class="num">02</span>Patterns</a></li>
     <li><a href="#frameworks" onclick="setActive(this)"><span class="num">03</span>Frameworks</a></li>
-    <li><a href="#protocols" onclick="setActive(this)"><span class="num">04</span>MCP &amp; A2A</a></li>
-    <li><a href="#reality" onclick="setActive(this)"><span class="num">05</span>Production Reality</a></li>
-    <li><a href="#timeline" onclick="setActive(this)"><span class="num">06</span>Timeline</a></li>
+    <li><a href="#protocols" onclick="setActive(this)"><span class="num">04</span>Protocols</a></li>
+    <li><a href="#harnesses" onclick="setActive(this)"><span class="num">05</span>Harnesses</a></li>
+    <li><a href="#evaluation" onclick="setActive(this)"><span class="num">06</span>Evaluation</a></li>
+    <li><a href="#reality" onclick="setActive(this)"><span class="num">07</span>Production Reality</a></li>
+    <li><a href="#timeline" onclick="setActive(this)"><span class="num">08</span>Timeline</a></li>
   </ul>
 
   <div class="nav-section">Resources</div>
@@ -473,6 +475,7 @@
         <span>● 3 Patterns</span>
         <span>● 8 Frameworks</span>
         <span>● 2 Protocols</span>
+        <span>● 2 Harnesses</span>
         <span>● Updated May 2026</span>
       </div>
     </div>
@@ -923,11 +926,161 @@
     </div>
   </section>
 
+  <!-- Harnesses -->
+  <section class="section" id="harnesses">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">05</span>
+        <h2>Agent Harnesses</h2>
+      </div>
+      <p class="section-intro reveal">
+        These aren't narrow coding copilots or chatbot wrappers. They're full-suite agent systems you install on a machine — PC, server, or VPS — and point at any LLM you want. Give them a goal and they can do almost anything a human can do on a computer: browse the web, write code, run terminal commands, manage files, schedule tasks, and talk to you across platforms.
+      </p>
+
+      <div class="fw-grid">
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag platform">Full Suite</span>
+            <span class="stars">★ 148,127</span>
+          </div>
+          <h3>Hermes Agent</h3>
+          <p>Built by Nous Research. The only agent with a closed learning loop — it creates skills from experience, improves them during use, and builds a model of who you are across sessions. Use any model via OpenRouter (200+ models), Nous Portal, NVIDIA NIM, Kimi, MiniMax, HuggingFace, OpenAI, or your own endpoint. <code>hermes model</code> switches instantly — no code changes.</p>
+          <div class="meta">
+            Platforms: Telegram, Discord, Slack, WhatsApp, Signal, CLI, Email <br>
+            Tools: 40+ built-in + MCP servers + custom skills <br>
+            Extras: Cron scheduling, voice memos, subagents, session search
+          </div>
+        </div>
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag experimental">Open Source</span>
+            <span class="stars">★ 56,233</span>
+          </div>
+          <h3>OpenManus</h3>
+          <p>MetaGPT team's answer to closed agents. Built in 3 hours, open-sourced immediately. Flexible framework for creating agents with different capabilities and behaviors. Comes with OpenManus-RL for reinforcement-learning-based tuning (GRPO) of LLM agents.</p>
+          <div class="meta">
+            Best for: Research, custom agent behavior <br>
+            Unique: RL training pipeline for agent models
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-list" style="margin-top: 32px;">
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🔧</div>
+          <div class="pattern-body">
+            <h3>Terminal &amp; Code Execution</h3>
+            <p>Full TUI with multiline editing, slash-command autocomplete, streaming tool output. Can run shell commands, Python scripts, Docker containers. Hermes has 7 terminal backends: local, Docker, SSH, Singularity, Modal, Daytona, Vercel Sandbox. Runs on a $5 VPS or a GPU cluster.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🧠</div>
+          <div class="pattern-body">
+            <h3>Model Agnostic</h3>
+            <p>You are not locked to one provider. Switch from GPT-4o to Claude to a local Llama model with one command. The agent's tool-calling and reasoning adapt to whatever model you plug in. You just need to know the base capabilities — the agent handles the rest.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🔄</div>
+          <div class="pattern-body">
+            <h3>Self-Improving Skills</h3>
+            <p>After complex tasks, Hermes autonomously creates reusable skills — procedural memory it can recall and refine. Skills self-improve during use and are compatible with the <code>agentskills.io</code> open standard. The agent literally gets better the longer you run it.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">📱</div>
+          <div class="pattern-body">
+            <h3>Multi-Platform Gateway</h3>
+            <p>Talk to the same agent from Telegram, Discord, Slack, WhatsApp, Signal, or Email — all from a single gateway process. Cross-platform conversation continuity means you can start a task on Discord and check status on Telegram. Voice memo transcription included.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">⏰</div>
+          <div class="pattern-body">
+            <h3>Scheduled Automations</h3>
+            <p>Built-in cron scheduler with delivery to any platform. Daily reports, nightly backups, weekly audits — all in natural language, running unattended. The agent works while you sleep.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🤝</div>
+          <div class="pattern-body">
+            <h3>Delegation &amp; Parallelization</h3>
+            <p>Spawn isolated subagents for parallel workstreams. Write Python scripts that call tools via RPC, collapsing multi-step pipelines into zero-context-cost turns. Research-ready with batch trajectory generation and RL environments for training the next generation of tool-calling models.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evaluation -->
+  <section class="section" id="evaluation">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">06</span>
+        <h2>Evaluation</h2>
+      </div>
+      <p class="section-intro reveal">
+        Building agents is easy. Knowing if they're any good is hard. These frameworks benchmark agent capabilities on standardized tasks so you can compare models, architectures, and prompt strategies objectively.
+      </p>
+
+      <div class="fw-grid">
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag engineer">Research</span>
+            <span class="stars">★ 12,540</span>
+          </div>
+          <h3>LM Evaluation Harness</h3>
+          <p>EleutherAI's unified framework for benchmarking language models on 200+ evaluation tasks. Powers Hugging Face's Open LLM Leaderboard. Used by NVIDIA, Cohere, BigScience, Mosaic ML, and Nous Research internally.</p>
+          <div class="meta">
+            Tasks: MMLU, GSM8K, HumanEval, BBH, HellaSwag, 200+ more <br>
+            Models: 25+ backends including HF Transformers, vLLM, OpenAI
+          </div>
+        </div>
+        <div class="fw-card reveal">
+          <div class="tag-row">
+            <span class="tag experimental">Agent-Specific</span>
+            <span class="stars">★ 8,566</span>
+          </div>
+          <h3>SWE-bench</h3>
+          <p>The standard for evaluating AI agents on real-world software engineering. Tests whether an agent can read a GitHub issue, understand a codebase, write a patch, and pass the test suite. The brutal reality check for coding agents.</p>
+          <div class="meta">
+            Dataset: 2,000+ real GitHub issues from 12 Python repos <br>
+            Metric: Pass rate (agent-written patch passes CI)
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-list" style="margin-top: 32px;">
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">📊</div>
+          <div class="pattern-body">
+            <h3>Why Evaluation Matters</h3>
+            <p>"My agent works great" is not a benchmark. Without standardized tests, you can't tell if your prompt change helped, if a new model is actually better, or if your agent just got lucky on the demo task. Evaluation separates real progress from vibes.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">🎯</div>
+          <div class="pattern-body">
+            <h3>Key Benchmarks for Agents</h3>
+            <p><strong>MMLU</strong> — general knowledge reasoning. <strong>GSM8K</strong> — grade-school math. <strong>HumanEval</strong> — code generation. <strong>SWE-bench</strong> — real software engineering. <strong>AgentBench</strong> — multi-step tool use. <strong>GAIA</strong> — general AI assistants on real-world tasks.</p>
+          </div>
+        </div>
+        <div class="pattern-row reveal">
+          <div class="pattern-icon">⚖️</div>
+          <div class="pattern-body">
+            <h3>The Benchmark Trap</h3>
+            <p>Agents that score well on MMLU can still fail at real tasks. Agents that ace HumanEval might break your production code. Benchmarks measure capability, not reliability. Always test on your actual use case before shipping.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Production Reality -->
   <section class="section" id="reality">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">05</span>
+        <span class="section-num">07</span>
         <h2>Production Reality</h2>
       </div>
       <p class="section-intro reveal">The blog posts don't talk about this. Here's what actually matters when you ship.</p>
@@ -977,7 +1130,7 @@
   <section class="section" id="timeline">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-num">06</span>
+        <span class="section-num">08</span>
         <h2>Timeline</h2>
       </div>
       <p class="section-intro reveal">Agentic AI didn't appear overnight. Here's how we got here.</p>
@@ -1024,9 +1177,14 @@
           <div class="t-desc">Agent web automation goes mainstream. 93k stars by mid-2026.</div>
         </div>
         <div class="t-item">
+          <div class="t-date">Feb 2026</div>
+          <div class="t-title">Hermes Agent launches</div>
+          <div class="t-desc">Nous Research ships a self-improving agent suite with 40+ tools, model-agnostic support, and a learning loop. 148k stars by May 2026.</div>
+        </div>
+        <div class="t-item">
           <div class="t-date">May 2026</div>
           <div class="t-title">This Roadmap</div>
-          <div class="t-desc">The field is converging. Platforms (Dify, n8n) absorb frameworks. Protocols (MCP, A2A) standardize interoperability.</div>
+          <div class="t-desc">The field is converging. Harnesses (Hermes, OpenManus) run full machines. Platforms (Dify, n8n) absorb frameworks. Protocols (MCP, A2A) standardize interoperability. Evaluation becomes mandatory.</div>
         </div>
       </div>
     </div>
@@ -1082,7 +1240,7 @@
   }
 
   // Scroll spy
-  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'reality', 'timeline'];
+  const sections = ['overview', 'stages', 'patterns', 'frameworks', 'protocols', 'harnesses', 'evaluation', 'reality', 'timeline'];
   addEventListener('scroll', () => {
     let current = 'overview';
     for (const id of sections) {
